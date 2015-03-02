@@ -1,22 +1,13 @@
-class RegisterController
-  ERROR_NO_PASSWORD : "Password cannot be empty"
+class SignupController
+  @ERROR_NO_EMAIL: "Please enter a valid email address"
+  @ERROR_NO_PASSWORD : "Password field cannot be blank"
+  @ERROR_PASSWORDS_MATCH: "Passwords don't match"
 
-  constructor: ($cookies, $location, AuthenticatorService) ->
-    @cookies  = $cookies
-    @location = $location
-    @AuthenticatorService = AuthenticatorService
+  constructor: () ->
 
-    @location.path "/#{@cookies.uuid}" if @cookies.uuid?
+  signup: (email, password, confirmPassword) =>
+    @errorMessage = SignupController.ERROR_NO_EMAIL unless email
+    @errorMessage = SignupController.ERROR_NO_PASSWORD unless password
+    @errorMessage = SignupController.ERROR_PASSWORDS_MATCH unless confirmPassword == password
 
-  register: (pin) =>
-    return @errorMessage = @ERROR_NO_PIN if _.isEmpty pin
-    return @errorMessage = @ERROR_PIN_NOT_NUMERIC unless /^\d+$/.test pin
-    @AuthenticatorService.registerWithPin(pin)
-    .then (res) =>
-      @cookies.uuid = res.uuid
-      @cookies.token = res.token
-      @location.path "/#{res.uuid}"
-    .catch =>
-      @errorMessage = "Unable to register a new device. Please try again."
-
-angular.module('email-password').controller 'RegisterController', RegisterController
+angular.module('email-password').controller 'SignupController', SignupController

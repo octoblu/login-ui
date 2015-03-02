@@ -1,4 +1,4 @@
-class AuthenticatorService
+class SignupService
   constructor: ($q, $http) ->
     @q = $q
     @http = $http
@@ -17,5 +17,5 @@ class AuthenticatorService
       .then (result) => result.data.token
       .catch (error) => @q.reject new Error(error.data) 
 
-angular.module('email-password').service 'AuthenticatorService', AuthenticatorService
+angular.module('email-password').service 'SignupService', SignupService
 

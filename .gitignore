@@ -27,3 +27,5 @@ node_modules
 # Users Environment Variables
 .lock-wscript
 email-password-site.sublime-workspace
+lib
+public/assets/dist
