@@ -1,0 +1,26 @@
+{
+  "name": "email-password-site",
+  "version": "1.0.0",
+  "homepage": "https://github.com/octoblu/email-password-site",
+  "authors": [
+    "Square Root of Saturn <sqrt@octoblu.com>"
+  ],
+  "description": "Front End for Email/Password Authenticator for Octoblu",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "lib/bower",
+    "test"
+  ],
+  "dependencies": {
+    "lodash": "~3.1.0",
+    "angular": "~1.3.13",
+    "angular-cookies": "~1.3.13",
+    "angular-route": "~1.3.13",
+    "angular-mocks": "~1.3.13",
+    "angular-material": "master",
+    "angulartics": "~0.17.2"
+  }
+}

@@ -1,0 +1,24 @@
+<md-content layout="row" layout-align="center">  
+  <md-card class="pin-card">
+    <md-card-content>
+      <form ng-submit="controller.register(pin)" novalidate>
+        <md-input-container flex>
+          <label>Email</label>
+            <input type="email" ng-model="email" class="text-center" required>
+        </md-input-container>
+        <md-input-container flex>
+          <label>Password</label>
+          <input type="password" ng-model="password" class="text-center" required>
+        </md-input-container>
+        <md-input-container flex>
+          <label>Confirm Password</label>
+          <input type="password" ng-model="confirmPassword" class="text-center" required>
+        </md-input-container>
+        <div class="pin-button-container">                
+          <md-button class="md-primary md-raised pin-button">Sign Up</md-button>
+        </div>
+        <p class="text-center text-warning">{{controller.errorMessage}}</p>
+      </form>
+    </md-card-content>
+  </md-card>
+</md-content>

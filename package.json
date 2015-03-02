@@ -1,0 +1,62 @@
+{
+  "name": "email-password-site",
+  "version": "1.0.0",
+  "description": "Front end for email and password authenticator",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "gulp watch",
+    "test": "node_modules/karma/bin/karma start --single-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/octoblu/email-password-site.git"
+  },
+  "keywords": [
+    "octoblu",
+    "cats",
+    "flows",
+    "IoT"
+  ],
+  "author": "Sqrt of Saturn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/octoblu/email-password-site/issues"
+  },
+  "homepage": "https://github.com/octoblu/email-password-site",
+  "dependencies": {
+    "angular-material": "^0.7.1",
+    "body-parser": "^1.11.0",
+    "coffee-script": "^1.8.0",
+    "cookie-parser": "^1.3.3",
+    "debug": "^2.1.1",
+    "express": "^4.11.2",
+    "gulp": "~3.8.6",
+    "gulp-bower": "0.0.6",
+    "gulp-coffee": "^2.2.0",
+    "gulp-concat": "~2.3.3",
+    "gulp-plumber": "~0.6.4",
+    "gulp-sourcemaps": "~1.1.0",
+    "gulp-webserver": "^0.9.0",
+    "lodash": "^2.4.1",
+    "main-bower-files": "^2.0.0",
+    "bower": "^1.3.3"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "chai-as-promised": "^4.1.1",
+    "karma": "^0.12.19",
+    "karma-chai-plugins": "~0.2.3",
+    "karma-coffee-preprocessor": "^0.2.1",
+    "karma-growl-reporter": "~0.1.1",
+    "karma-mocha": "~0.1.6",
+    "karma-osx-reporter": "^0.1.0",
+    "karma-phantomjs-launcher": "~0.1.4",
+    "karma-sinon-chai": "^0.2.0",
+    "karma-spec-reporter": "0.0.13",
+    "sinon": "^1.12.2",
+    "sinon-chai": "^2.6.0"
+  }
+}
