@@ -1,21 +1,7 @@
 class SignupService
-  constructor: ($q, $http) ->
-    @q = $q
-    @http = $http
+  constructor: () ->
 
-  registerWithPin: (pin)=>
-    @http.post('https://pin.octoblu.com/devices', {
-            pin: "#{pin}"
-            device:
-              type: 'blu'
-              online: true
-        }).then (result) => result.data
-
-  authenticate: (uuid, pin) =>
-    @http
-      .post "https://pin.octoblu.com/devices/#{uuid}/sessions", pin: pin
-      .then (result) => result.data.token
-      .catch (error) => @q.reject new Error(error.data) 
-
+  register: () =>
+   
 angular.module('email-password').service 'SignupService', SignupService
 

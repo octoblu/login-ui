@@ -5,7 +5,10 @@ describe 'SignupController', ->
     inject ($controller, $q, $rootScope) ->
       @q = $q
       @rootScope = $rootScope
-      @sut = $controller 'SignupController'
+      @SignupService = register: sinon.stub()
+      @sut = $controller 'SignupController',
+        SignupService: @SignupService
+
 
   it 'should exist', ->
     expect(@sut).to.exist
@@ -53,6 +56,38 @@ describe 'SignupController', ->
 
       it 'should set the errorMessage', ->
         expect(@sut.errorMessage).to.deep.equal "Passwords don't match"
+
+    describe 'when email, password and confirmPassword are valid', ->
+      beforeEach ->
+        @email = 'parachute@failure.io'
+        @password = 'happenstance'
+        @confirmPassword = 'happenstance'
+        @sut.signup @email, @password, @confirmPassword
+
+      it 'should call the signup service', ->
+        expect(@SignupService.register).to.have.been.called
+
+    describe 'when SignupService is called', ->
+      beforeEach ->
+        @email = "foolishly@ignores.warning"
+        @password = "nahIGotThis"
+        @SignupService.register.returns @q.when(uuid: 'extreme-brotimes', token: 'sickblast to the max')
+        @sut.signup @email, @password, @password
+        @rootScope.$digest()
+
+      it 'should return a uuid and token', ->
+        expect(@SignupService.register).to.have.been.calledWith @email, @password 
+
+    describe 'when SignupService is called', ->
+      beforeEach ->
+        @email = "faulty@machinery"
+        @password = "execution"
+        @SignupService.register.returns @q.when(uuid: 'falling', token: 'tree')
+        @sut.signup @email, @password, @password
+        @rootScope.$digest()
+
+      it 'should return a uuid and token', ->
+        expect(@SignupService.register).to.have.been.calledWith @email, @password 
 
 
 
