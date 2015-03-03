@@ -17,7 +17,7 @@ deploy:
   - provider: opsworks
     access_key_id: AKIAIT4X4NDGM2WVL6VA
     secret_access_key:
-      secure: ASj8a9Pis4MqsPdowfkTT0RIGjElAYLCB+mACeL8VB/AEexq25ZmQJsYnDbLSumJdvDliurbz6VyYU8koN7NNqwlFQkAKzloX22J3UQwvd71FD2LzOxkq+1XtSMiy2W3UKgw0qBgtAeIBwrJnr5/uyU9AvuJulwAWDRVHmFc6X8=
+      secure: U8soNqCFPtUaJCeTBG8wSqa9/p0RMnF5Tf1LuFLAgdO/sEpAF7TU34pOTKiyf3XCwVuQOtxyODDsw0voAiP+rM6QELKNl+JxDFyakoPvniq8RYiO+5hkGwK8z9Hb2tFCQH7m7j1LmQDrfunN49545S8bja+v/dSFm3T5PZQD7tM=
     app-id: f38cccd6-515e-4dbd-ba06-883809c5ea19
     on:
       branch: master
