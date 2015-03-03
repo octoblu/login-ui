@@ -4,19 +4,19 @@ class SignupController
   @ERROR_PASSWORDS_MATCH: "Passwords don't match"
   @ERROR_REGISTERING: "Error registering with meshblu"
 
-  constructor: (SignupService, $location, $window) ->
-    @SignupService = SignupService
+  constructor: (AuthenticatorService, $window, $routeParams) ->
+    @AuthenticatorService = AuthenticatorService
     @window = $window
-    @location = $location
+    @redirectURL = $routeParams.redirect
 
   signup: (email, password, confirmPassword) =>
     @errorMessage = SignupController.ERROR_NO_EMAIL unless email
     @errorMessage = SignupController.ERROR_NO_PASSWORD unless password
     @errorMessage = SignupController.ERROR_PASSWORDS_MATCH unless confirmPassword == password
 
-    @SignupService.register(email, password)
+    @AuthenticatorService.register(email, password)
     .then (result) =>
-      @window.location = "#{@location.params.redirectURL}?uuid=#{result.uuid}&token=#{result.token}"
+      @window.location = "#{@redirectURL}?uuid=#{result.uuid}&token=#{result.token}"
     .catch =>
       @errorMessage = SignupController.ERROR_REGISTERING      
 

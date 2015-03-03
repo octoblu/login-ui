@@ -1,7 +1,7 @@
 <md-content layout="row" layout-align="center">  
   <md-card class="pin-card">
     <md-card-content>
-      <form ng-submit="controller.register(pin)" novalidate>
+      <form ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
         <md-input-container flex>
           <label>Email</label>
             <input type="email" ng-model="email" class="text-center" required>

@@ -5,14 +5,12 @@ describe 'SignupController', ->
     inject ($controller, $q, $rootScope, $window) ->
       @q = $q
       @rootScope = $rootScope
-      @location = params: {
-        redirectURL: "https://app.octoblu.com/api/sessions"
-      }
+      @routeParams = redirect: "https://app.octoblu.com/api/sessions"
       @window = location: sinon.stub()
-      @SignupService = register: sinon.stub().returns @q.when()
+      @AuthenticatorService = register: sinon.stub().returns @q.when()
       @sut = $controller 'SignupController',
-        SignupService: @SignupService
-        $location: @location
+        AuthenticatorService: @AuthenticatorService
+        $routeParams: @routeParams
         $window: @window
 
 
@@ -76,30 +74,30 @@ describe 'SignupController', ->
         return
 
       it 'should call the signup service', ->
-        expect(@SignupService.register).to.have.been.called
+        expect(@AuthenticatorService.register).to.have.been.called
 
-    describe 'when SignupService resolves the promise', ->
+    describe 'when AuthenticatorService resolves the promise', ->
       beforeEach ->
         @email = "faulty@machinery"
         @password = "execution"
         @uuid = "failing"
         @token = "tree"
         @redirectURL = "https://app.octoblu.com/api/sessions?uuid=#{@uuid}&token=#{@token}"
-        @SignupService.register.returns @q.when(uuid: @uuid, token: @token)
+        @AuthenticatorService.register.returns @q.when(uuid: @uuid, token: @token)
         @sut.signup @email, @password, @password
         @rootScope.$digest()
 
       it 'should return a uuid and token', ->
-        expect(@SignupService.register).to.have.been.calledWith @email, @password
+        expect(@AuthenticatorService.register).to.have.been.calledWith @email, @password
 
       it 'should redirect to the callback url with that uuid and token', ->
         expect(@window.location).to.deep.equal @redirectURL
 
-    describe 'when SignupService rejects the promise', ->
+    describe 'when AuthenticatorService rejects the promise', ->
       beforeEach ->
         @email = "faulty@machinery"
         @password = "execution"
-        @SignupService.register.returns @q.reject(new Error('oh no'))
+        @AuthenticatorService.register.returns @q.reject(new Error('oh no'))
         @sut.signup @email, @password, @password
         @rootScope.$digest()
 
