@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "Front end for email and password authenticator",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "start": "gulp watch",
-    "test": "node_modules/karma/bin/karma start --single-run"
+    "test": "gulp && node_modules/karma/bin/karma start --single-run"
   },
   "repository": {
     "type": "git",
