@@ -29,3 +29,5 @@ node_modules
 email-password-site.sublime-workspace
 lib
 public/assets/dist
+.DS_STORE
+app/.DS_STORE

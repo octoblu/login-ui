@@ -1,24 +1,30 @@
-<md-content layout="row" layout-align="center">  
-  <md-card class="pin-card">
-    <md-card-content>
-      <form ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
-        <md-input-container flex>
-          <label>Email</label>
-            <input type="email" ng-model="email" class="text-center" required>
-        </md-input-container>
-        <md-input-container flex>
-          <label>Password</label>
-          <input type="password" ng-model="password" class="text-center" required>
-        </md-input-container>
-        <md-input-container flex>
-          <label>Confirm Password</label>
-          <input type="password" ng-model="confirmPassword" class="text-center" required>
-        </md-input-container>
-        <div class="pin-button-container">                
-          <md-button class="md-primary md-raised pin-button">Sign Up</md-button>
-        </div>
-        <p class="text-center text-warning">{{controller.errorMessage}}</p>
-      </form>
-    </md-card-content>
-  </md-card>
+<md-content layout="row" layout-align="center"> 
+  <div class="signup-card">
+    <img class="signup-logo" src="/assets/images/octoblucircle.png">
+
+    <form class="signup-form" ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
+      <h3 class="signup-header">SIGN UP</h3>
+
+      <md-input-container flex> 
+        <label>Email</label>
+          <input type="email" ng-model="email" required>
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>Password</label>
+        <input type="password" ng-model="password" required>
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>Confirm Password</label>
+        <input type="password" ng-model="confirmPassword" required>
+      </md-input-container>
+
+      <div class="pin-button-container">                
+        <md-button class="md-primary md-raised signup-button">Sign Up</md-button>
+      </div>
+      
+      <p class="text-center text-warning">{{controller.errorMessage}}</p>
+    </form>
+  </div> 
 </md-content>

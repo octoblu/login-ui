@@ -1,34 +1,20 @@
-.pin-card {
+.signup-card {
   flex: 1;
-  -webkit-flex: 1;
-  max-width: 12em;
-  font-size:3em;
+  max-width: 18em;
+  font-size: 1.2em;
 }
 
-.pin-card input {
-  font-size:3em;
-}
-
-.pin-button-container {
-  display: flex;
-  -webkit-display: flex;
-  justify-content: space-around;
-  -webkit-justify-content: space-around;
-}
-
-.pin-button {
-  width: 62%;
-  height: 2em;
-}
-
-.text-center {
+.signup-header {
   text-align: center;
+  text-transform: uppercase;
 }
 
-md-grid-tile {
-  transition: all 400ms ease-out 50ms; 
+.signup-logo {
+  display:block;
+  margin: 3em auto 2em;
 }
 
-.text-warning {
-  color: rgb(244, 67, 54);
+.signup-button {
+  width: 100%;
+  text-align: center;
 }
