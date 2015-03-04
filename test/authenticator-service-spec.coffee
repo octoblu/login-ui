@@ -14,7 +14,7 @@ describe 'AuthenticatorService', ->
     describe 'when called with a email, password, and a callbackUrl', ->
       beforeEach ->
         @http.post.returns @q.when({})
-        @sut.authenticate 'sliced@diced.net', 'one-easy-payment'
+        @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'laptop.com'
         @rootScope.$digest()
 
       it 'should call POST /sessions', ->
@@ -22,6 +22,7 @@ describe 'AuthenticatorService', ->
         params =
           email: 'sliced@diced.net'
           password: 'one-easy-payment'
+          callbackUrl: 'laptop.com'
 
         expect(@http.post).to.have.been.calledWith url, params
 
