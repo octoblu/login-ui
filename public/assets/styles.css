@@ -4,6 +4,13 @@
   font-size: 1.2em;
 }
 
+.error-text {
+  text-align: center;
+  color: rgb(244,67,54);
+  line-height: 0;
+  margin-top: 0;
+}
+
 .form-header {
   text-align: center;
   text-transform: uppercase;
@@ -17,4 +24,8 @@
 .signup-button {
   width: 100%;
   text-align: center;
+}
+
+.user-form {
+  margin-bottom: 2em;
 }

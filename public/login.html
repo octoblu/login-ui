@@ -1,16 +1,16 @@
-<md-content layout="row" layout-align="center"> 
+<md-content layout="row" layout-align="center">
   <div class="signup-card" layout="column">
     <img class="octoblu-logo" src="/assets/images/octoblucircle.png">
 
-    <form name="loginForm" class="signup-form" ng-submit="controller.login(email, password)" novalidate>
+    <form name="controller.loginForm" class="user-form" ng-submit="controller.login(email, password)" novalidate>
       <h3 class="form-header">Login</h3>
 
-      <md-input-container flex> 
+      <md-input-container flex>
         <label>Email</label>
         <input type="email" ng-model="email" name="email" required>
-        <div ng-messages="loginForm.email.$error">
-          <div ng-message="required" ng-show="loginForm.email.$error.required && loginForm.email.$touched">Required.</div>
-          <div ng-message="email" ng-show="loginForm.email.$error.email">Must be a valid email address.</div>
+        <div ng-messages="controller.loginForm.email.$error">
+          <div ng-message="required" ng-show="controller.loginForm.email.$error.required && controller.loginForm.email.$touched">Required.</div>
+          <div ng-message="email" ng-show="controller.loginForm.email.$error.email">Must be a valid email address.</div>
         </div>
 
       </md-input-container>
@@ -18,18 +18,19 @@
       <md-input-container flex>
         <label>Password</label>
         <input type="password" ng-model="password" name="password" required>
-        <div ng-messages="loginForm.password.$error">
-          <div ng-message="required" ng-show="loginForm.password.$error.required && loginForm.password.$touched">Required.</div>
+        <div ng-messages="controller.loginForm.password.$error">
+          <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
         </div>
       </md-input-container>
 
-      <div class="pin-button-container" layout="column">                
+      <p class="error-text">{{controller.errorMessage}}</p>
+
+      <div class="pin-button-container" layout="column">
         <md-button class="md-primary md-raised">Login</md-button>
       </div>
-      
-      <p class="text-center text-warning">{{controller.errorMessage}}</p>
+
     </form>
 
     <md-button class="md-primary" href="/signup">Create an Account</md-button>
-  </div> 
+  </div>
 </md-content>

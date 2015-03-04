@@ -5,7 +5,7 @@ class LoginController
   login: (email, password) =>
     @AuthenticatorService
       .authenticate email, password
-      .catch (error) =>
+      .then (error) =>
         @errorMessage = error
 
 angular.module('email-password').controller 'LoginController', LoginController
