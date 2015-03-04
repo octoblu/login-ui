@@ -1,30 +1,42 @@
-<md-content layout="row" layout-align="center"> 
+<md-content layout="row" layout-align="center">
   <div class="signup-card">
     <img class="octoblu-logo" src="/assets/images/octoblucircle.png">
 
-    <form ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
+    <form name="controller.signupForm" ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
       <h3 class="form-header">Sign up</h3>
 
-      <md-input-container flex> 
+      <md-input-container flex>
         <label>Email</label>
-          <input type="email" ng-model="email" required>
+        <input type="email" name="email" ng-model="email" required>
+        <div ng-messages="controller.signupForm.email.$error">
+          <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
+          <div ng-message="email" ng-show="controller.signupForm.email.$error.email">Must be a valid email address.</div>
+        </div>
       </md-input-container>
 
       <md-input-container flex>
         <label>Password</label>
-        <input type="password" ng-model="password" required>
+        <input type="password" name="password" ng-model="password" required>
+        <div ng-messages="controller.signupForm.password.$error">
+          <div ng-message="required" ng-show="controller.passwordRequiredError()">Required.</div>
+        </div>
       </md-input-container>
 
-      <md-input-container flex>
+      <md-input-container flex md-is-error="controller.confirmPasswordError()">
         <label>Confirm Password</label>
-        <input type="password" ng-model="confirmPassword" required>
+        <input type="password" name="confirmPassword" ng-model="confirmPassword" required>
+
+        <div ng-messages="controller.signupForm.confirmPassword.$error">
+          <div ng-message="required" ng-show="controller.signupForm.confirmPassword.$error.required && controller.signupForm.confirmPassword.$touched">Required.</div>
+          <div ng-message="match" ng-show="controller.signupForm.confirmPassword.$error.match">Passwords don't match.</div>
+        </div>
       </md-input-container>
 
-      <div class="pin-button-container">                
+      <div class="pin-button-container">
         <md-button class="md-primary md-raised signup-button">Sign Up</md-button>
       </div>
-      
+
       <p class="text-center text-warning">{{controller.errorMessage}}</p>
     </form>
-  </div> 
+  </div>
 </md-content>
