@@ -1,18 +1,11 @@
 class LoginController
-  constructor: (AuthenticatorService, $location, $routeParams, $cookies) ->
+  constructor: (AuthenticatorService) ->
     @AuthenticatorService = AuthenticatorService
-    @location = $location
-    @cookies = $cookies
-    @uuid = $routeParams.uuid
 
-  login: (uuid, pin) =>
-    @AuthenticatorService.authenticate uuid, pin
-      .then (token) =>
-        @cookies.uuid = uuid
-        @cookies.token = token
-        @location.path "/#{uuid}"
+  login: (email, password) =>
+    @AuthenticatorService
+      .authenticate email, password
       .catch (error) =>
-        @errorMessage = error.message
-
+        @errorMessage = error
 
 angular.module('email-password').controller 'LoginController', LoginController

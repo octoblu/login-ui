@@ -8,8 +8,21 @@ describe 'AuthenticatorService', ->
       @httpBackend = $httpBackend
       @sut = AuthenticatorService
 
-  it 'should exist', ->
-    expect(@sut).to.exist
+  describe '->authenticate', ->
+    describe 'when called with a email and a password', ->
+      beforeEach ->
+        @authURL = 'https://email-password.octoblu.com/sessions'
+        @email = 'sliced@diced.net'
+        @password = 'one-easy-payment'
+
+      it 'should call POST /sessions', ->
+        @httpBackend.expectPOST(@authURL, {
+          email: @email
+          password: @password
+        }).respond()
+
+        @sut.authenticate @email, @password
+        @httpBackend.flush()
 
   describe '->register', ->
     beforeEach ->
