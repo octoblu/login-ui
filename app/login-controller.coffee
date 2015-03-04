@@ -1,6 +1,7 @@
 class LoginController
-  constructor: (AuthenticatorService) ->
+  constructor: ($routeParams, AuthenticatorService) ->
     @AuthenticatorService = AuthenticatorService
+    @routeParams = $routeParams
 
   emailRequiredError: =>
     return true if @loginForm.email.$error.required && @loginForm.email.$touched
@@ -17,7 +18,7 @@ class LoginController
 
     @loading = true
     @AuthenticatorService
-      .authenticate email, password
+      .authenticate email, password, @routeParams.callback
       .then (error) =>
         @loading = false
         @errorMessage = error

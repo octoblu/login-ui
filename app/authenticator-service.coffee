@@ -3,14 +3,13 @@ class AuthenticatorService
     @q = $q
     @http = $http
 
-  authenticate: (email, password) =>
+  authenticate: (email, password, callbackUrl) =>
     @http
       .post 'https://email-password.octoblu.com/sessions', {
         email: email
         password: password
+        callbackUrl: callbackUrl
       }
-      .then (result) =>
-        result.data
       .catch (result) =>
         result.data
 
@@ -20,7 +19,7 @@ class AuthenticatorService
         email: email
         password: password
       }
-      .then (result) =>
+      .catch (result) =>
         result.data
 
   passwordMatches: (password, confirmPassword) =>
