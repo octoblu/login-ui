@@ -38,6 +38,7 @@ gulp.task 'webserver', ->
         livereload: false
         directoryListing: false
         open: false
+        fallback: 'index.html'
       })
 
 gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
