@@ -1,20 +1,32 @@
-<md-content layout="row" layout-align="center">  
-  <md-card class="pin-card">   
-    <md-card-content>
-      <form ng-submit="controller.login(controller.email, password)" novalidate>
-        <md-input-container flex>
-          <label>Email</label>
-          <input type="email" ng-model="email" class="text-center" required>
-        </md-input-container>
-        <md-input-container flex>
-          <label>Password</label>
-          <input type="password" ng-model="password" class="text-center" required>
-        </md-input-container>                      
-        <div class="pin-button-container">
-          <md-button class="md-primary md-raised pin-button">Login</md-button>
+<md-content layout="row" layout-align="center"> 
+  <div class="signup-card" layout="column">
+    <img class="signup-logo" src="/assets/images/octoblucircle.png">
+
+    <form name="signupForm" class="signup-form" ng-submit="controller.login(email, password)" novalidate>
+      <h3 class="signup-header">LOGIN</h3>
+
+      <md-input-container flex> 
+        <label>Email</label>
+        <input type="email" ng-model="email" name="email" required>
+        <div ng-messages="signupForm.email.$error">
+          <div ng-message="required" ng-show="signupForm.email.$error.required && signupForm.email.$touched">Required.</div>
+          <div ng-message="email" ng-show="signupForm.email.$error.email">Must be a valid email address.</div>
         </div>
-        <p class="text-center text-warning">{{controller.errorMessage}}</p>
-      </form>
-    </md-card-content>
-  </md-card>
+
+      </md-input-container>
+
+      <md-input-container flex>
+        <label>Password</label>
+        <input type="password" ng-model="password" required>
+      </md-input-container>
+
+      <div class="pin-button-container" layout="column">                
+        <md-button class="md-primary md-raised">Login</md-button>
+      </div>
+      
+      <p class="text-center text-warning">{{controller.errorMessage}}</p>
+    </form>
+
+    <md-button class="md-primary" href="/signup">Create an Account</md-button>
+  </div> 
 </md-content>
