@@ -1,70 +1,50 @@
 describe 'AuthenticatorService', ->
   beforeEach ->
-    module 'email-password', =>
+    module 'email-password', ($provide) =>
+      @http = post: sinon.stub()
+      $provide.value '$http', @http
       return
 
-    inject ($httpBackend, $rootScope, AuthenticatorService) =>
+    inject ($q, $rootScope, AuthenticatorService) =>
+      @q = $q
       @rootScope = $rootScope
-      @httpBackend = $httpBackend
       @sut = AuthenticatorService
 
   describe '->authenticate', ->
-    describe 'when called with a email and a password', ->
+    describe 'when called with a email, password, and a callbackUrl', ->
       beforeEach ->
-        @authURL = 'https://email-password.octoblu.com/sessions'
-        @email = 'sliced@diced.net'
-        @password = 'one-easy-payment'
+        @http.post.returns @q.when({})
+        @sut.authenticate 'sliced@diced.net', 'one-easy-payment'
+        @rootScope.$digest()
 
       it 'should call POST /sessions', ->
-        @httpBackend.expectPOST(@authURL, {
-          email: @email
-          password: @password
-        }).respond()
+        url = 'https://email-password.octoblu.com/sessions'
+        params =
+          email: 'sliced@diced.net'
+          password: 'one-easy-payment'
 
-        @sut.authenticate @email, @password
-        @httpBackend.flush()
+        expect(@http.post).to.have.been.calledWith url, params
 
   describe '->register', ->
-    beforeEach ->
-      @signupUrl = 'https://email-password.octoblu.com/devices'
-
     describe 'when called', ->
-      it 'should post to signup.octoblu.com with the email and password', ->
-        @email = 'taft@president.org'
-        @password = 'bathtub'
-        @httpBackend.expectPOST(@signupUrl, {
-            email: @email
-            password: @password
-          }
-        ).respond()
-
-        @sut.register @email, @password
-        @httpBackend.flush()
-
-      it 'should post another email and password to  signup.octoblu.com/register', ->
-        @email = 'impeachthe@president.org'
-        @password = 'publice'
-        @httpBackend.expectPOST(@signupUrl, {
-            email: @email
-            password: @password
-          }
-        ).respond()
-
-        @sut.register @email, @password
-        @httpBackend.flush()
-
-    describe 'when the service responds with a non-201', ->
       beforeEach ->
-        @email = 'complicated'
-        @password = 'dolphin'
-        @httpBackend.expectPOST(@signupUrl,
-          email: @email
-          password: @password
-        ).respond(401, 'you done screwed up')
+        @http.post.returns @q.when({})
+        @sut.register 'taft@president.org', 'bathtub'
+        @rootScope.$digest()
 
-      describe 'when it is called with an email and password', ->
-        it 'should reject the promise and return the error', (done) ->
-          @sut.register(@email,@password).catch (error) =>
-            expect(error.data).to.equal 'you done screwed up'
-            done()
-          @httpBackend.flush()
+      it 'should post to signup.octoblu.com with the email and password', ->
+        url = 'https://email-password.octoblu.com/devices'
+        params =
+          email: 'taft@president.org'
+          password: 'bathtub'
+        expect(@http.post).to.have.been.calledWith url, params
+
+    describe 'when called and the service rejects', ->
+      beforeEach (done) ->
+        @http.post.returns @q.reject({data: 'you done screwed up'})
+        @sut.register 'complicated', 'dolphin'
+            .then (@errorMessage) => done()
+        @rootScope.$digest()
+
+      it 'should reject the promise and return the error', ->
+        expect(@errorMessage).to.equal 'you done screwed up'

@@ -9,8 +9,6 @@ class AuthenticatorService
         email: email
         password: password
       }
-      .then (result) =>
-        result.data
       .catch (result) =>
         result.data
 
@@ -20,7 +18,7 @@ class AuthenticatorService
         email: email
         password: password
       }
-      .then (result) =>
+      .catch (result) =>
         result.data
 
   passwordMatches: (password, confirmPassword) =>
