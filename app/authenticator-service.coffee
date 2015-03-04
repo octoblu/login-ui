@@ -19,5 +19,8 @@ class AuthenticatorService
     .then (result) =>         
       result.data
 
+  passwordMatches: (password, confirmPassword) =>
+    password != confirmPassword
+
 angular.module('email-password').service 'AuthenticatorService', AuthenticatorService
 

@@ -19,7 +19,7 @@
         <label>Password</label>
         <input type="password" ng-model="password" name="password" required>
         <div ng-messages="loginForm.password.$error">
-          <div ng-message="required" ng-show="loginForm.password.$error.required && loginForm.password.$touched">Required.</div>
+          <div ng-message="required" ng-show="passwordMatches(password, confirmPassword)">Required.</div>
         </div>
       </md-input-container>
 
