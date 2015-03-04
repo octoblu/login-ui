@@ -9,7 +9,7 @@
         <label>Email</label>
         <input type="email" ng-model="email" name="email" required>
         <div ng-messages="controller.loginForm.email.$error">
-          <div ng-message="required" ng-show="controller.loginForm.email.$error.required && controller.loginForm.email.$touched">Required.</div>
+          <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
           <div ng-message="email" ng-show="controller.loginForm.email.$error.email">Must be a valid email address.</div>
         </div>
 
@@ -26,7 +26,7 @@
       <p class="error-text">{{controller.errorMessage}}</p>
 
       <div class="pin-button-container" layout="column">
-        <md-button class="md-primary md-raised">Login</md-button>
+        <md-button ng-disabled="controller.loading" class="md-primary md-raised">Login</md-button>
       </div>
 
     </form>
