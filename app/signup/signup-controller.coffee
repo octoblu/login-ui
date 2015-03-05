@@ -14,9 +14,9 @@ class SignupController
     $scope.$watch 'confirmPassword', @verifyPasswordMatch, true
 
   signup: (email, password, confirmPassword) =>
-    @errorMessage = SignupController.ERROR_NO_EMAIL unless email
-    @errorMessage = SignupController.ERROR_NO_PASSWORD unless password
-    @errorMessage = SignupController.ERROR_PASSWORDS_MATCH unless confirmPassword == password
+    @signupForm?.email.$setTouched()
+    @signupForm?.password.$setTouched()
+    @signupForm?.confirmPassword.$setTouched()
 
     @AuthenticatorService.register(email, password)
     .then (result) =>
@@ -25,19 +25,19 @@ class SignupController
       @errorMessage = SignupController.ERROR_REGISTERING
 
   verifyPasswordMatch: =>
-    if @scope.confirmPassword?.length and @scope.password isnt @scope.confirmPassword
+    if @scope.confirmPassword?.length && @scope.password != @scope.confirmPassword
       @signupForm?.confirmPassword.$error.match = true
     else
       @signupForm?.confirmPassword.$error.match = false
-
-  confirmPasswordError: =>
-    return true if @signupForm?.confirmPassword.$error.match
-    return true if @signupForm?.confirmPassword.$error.required && @signupForm?.confirmPassword.$touched
 
   emailRequiredError: =>
     return true if @signupForm?.email.$error.required && @signupForm?.email.$touched
 
   passwordRequiredError: =>
     return true if @signupForm?.password.$error.required && @signupForm?.password.$touched
+
+  confirmPasswordError: =>
+    return true if @signupForm?.confirmPassword.$error.match
+    return true if @signupForm?.confirmPassword.$error.required && @signupForm?.confirmPassword.$touched
 
 angular.module('email-password').controller 'SignupController', SignupController
