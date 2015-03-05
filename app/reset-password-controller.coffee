@@ -11,7 +11,7 @@ class ResetPasswordController
 
   resetPassword: (password) =>
     return unless @verifyPasswordMatch()
-    @AuthenticatorService.resetPassword(@device, @token, @scope.password)
+    @AuthenticatorService.resetPassword(@device, @token, password)
       .then =>
         @location.path '/'
       .catch =>
@@ -20,8 +20,11 @@ class ResetPasswordController
   verifyPasswordMatch: =>
     if @scope.confirmPassword?.length && @scope.password != @scope.confirmPassword
       @resetForm?.confirmPassword.$error.match = true
-    else
-      @resetForm?.confirmPassword.$error.match = false
+      return false
+
+    @resetForm?.confirmPassword.$error.match = false
+    return true
+
 
   emailRequiredError: =>
     return true if @resetForm?.email.$error.required && @resetForm?.email.$touched

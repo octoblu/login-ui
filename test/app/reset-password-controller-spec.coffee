@@ -63,8 +63,7 @@ describe 'ResetPasswordController', ->
         @sut.verifyPasswordMatch = sinon.stub().returns true
         @sut.device = 'love-robot'
         @sut.token = 'science'
-        @scope.password = 'coolify'
-        @sut.resetPassword()
+        @sut.resetPassword('coolify')
         @rootScope.$digest()
 
       it 'should call AuthenticatorService.resetPassword with the appropriate parameters', ->
@@ -75,8 +74,7 @@ describe 'ResetPasswordController', ->
         @sut.verifyPasswordMatch = sinon.stub().returns true
         @sut.device = 'sad-story'
         @sut.token = 'non-lethal-shot'
-        @scope.password = 'self-immolation'
-        @sut.resetPassword()
+        @sut.resetPassword('self-immolation')
         @rootScope.$digest()
 
       it 'should call AuthenticatorService.resetPassword with the appropriate parameters', ->
@@ -88,8 +86,7 @@ describe 'ResetPasswordController', ->
         @sut.verifyPasswordMatch = sinon.stub().returns false
         @sut.device = 'sad-story'
         @sut.token = 'non-lethal-shot'
-        @scope.password = 'self-immolation'
-        @sut.resetPassword()
+        @sut.resetPassword('self-immolation')
         @rootScope.$digest()
 
       it 'should not call AuthenticatorService.resetPassword', ->
@@ -100,8 +97,7 @@ describe 'ResetPasswordController', ->
         @sut.verifyPasswordMatch = sinon.stub().returns true
         @sut.device = 'nine-lives'
         @sut.token = 'land-on'
-        @scope.password = 'your-feet'
-        @sut.resetPassword()
+        @sut.resetPassword('your-feet')
         @rootScope.$digest()
 
       it 'should redirect to login', ->
@@ -116,8 +112,7 @@ describe 'ResetPasswordController', ->
         @AuthenticatorService.resetPassword.returns @q.reject()
         @sut.device = 'nine-lives'
         @sut.token = 'land-on'
-        @scope.password = 'your-feet'
-        @sut.resetPassword()
+        @sut.resetPassword('your-feet')
         @rootScope.$digest()
 
       it 'should not redirect to login', ->
