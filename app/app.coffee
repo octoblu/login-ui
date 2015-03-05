@@ -20,5 +20,9 @@ angular
       templateUrl: '/forgot-password.html'
       controller:  'ForgotPasswordController'
       controllerAs: 'controller'
+    .when '/reset',
+      templateUrl: '/reset-password.html'
+      controller:  'ResetPasswordController'
+      controllerAs: 'controller'
     .otherwise redirectTo: '/'
 .run ($rootScope, $location) ->
