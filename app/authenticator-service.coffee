@@ -30,5 +30,10 @@ class AuthenticatorService
   passwordMatches: (password, confirmPassword) =>
     password != confirmPassword
 
+  forgotPassword: (email) =>
+    @http.post("#{AuthenticatorService.HOST}/forgot", email: email)
+      .then (result) =>
+        return result.data
+
 angular.module('email-password').service 'AuthenticatorService', AuthenticatorService
 

@@ -70,8 +70,34 @@ describe 'AuthenticatorService', ->
       it 'should reject the promise and return the error', ->
         expect(@errorMessage).to.equal 'you done screwed up'
 
-  xdescribe '->forgotPassword', ->
-    it 'should exist', ->
-      @sut.forgotPassword()
+  describe '->forgotPassword', ->
+    describe 'when called with an email', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when( data: 'hello' )
+        @sut.forgotPassword('peter@improved-bacon.com').then (@response) => done()
+        @rootScope.$digest()
+
+      it 'should post to http with a request to email-password.octoblu.com/forgot', ->
+        url = 'https://email-password.octoblu.com/forgot'
+        params =
+          email: 'peter@improved-bacon.com'
+        expect(@http.post).to.have.been.calledWith url, params
+
+      it 'should resolve the data', ->
+        expect(@response).to.equal 'hello'
 
 
+    describe 'when called with an email and http resolves a different result', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when( data: 'goodbye!' )
+        @sut.forgotPassword('peter@improved-bacon.com').then (@response) => done()
+        @rootScope.$digest()
+
+      it 'should post to http with a request to email-password.octoblu.com/forgot', ->
+        url = 'https://email-password.octoblu.com/forgot'
+        params =
+          email: 'peter@improved-bacon.com'
+        expect(@http.post).to.have.been.calledWith url, params
+
+      it 'should resolve the data', ->
+        expect(@response).to.equal 'goodbye!'
