@@ -13,7 +13,7 @@ describe 'AuthenticatorService', ->
   describe '->authenticate', ->
     describe 'when called with a email, password, and a callbackUrl', ->
       beforeEach ->
-        @http.post.returns @q.when( headers: {location: 'whatevs.co'})
+        @http.post.returns @q.when( headers: {Location: 'whatevs.co'})
         @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'laptop.com'
         @rootScope.$digest()
 
@@ -38,7 +38,7 @@ describe 'AuthenticatorService', ->
 
     describe 'when called and meshblu resolves with the uuid and token', ->
       beforeEach (done) ->
-        @http.post.returns @q.when(headers: {location: 'google.com'})
+        @http.post.returns @q.when(headers: {Location: 'google.com'})
         @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'laptop.com'
             .then (@result) => done()
         @rootScope.$digest()
