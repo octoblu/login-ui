@@ -69,3 +69,9 @@ describe 'AuthenticatorService', ->
 
       it 'should reject the promise and return the error', ->
         expect(@errorMessage).to.equal 'you done screwed up'
+
+  xdescribe '->forgotPassword', ->
+    it 'should exist', ->
+      @sut.forgotPassword()
+
+
