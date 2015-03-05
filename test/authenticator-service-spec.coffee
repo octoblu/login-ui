@@ -13,10 +13,7 @@ describe 'AuthenticatorService', ->
   describe '->authenticate', ->
     describe 'when called with a email, password, and a callbackUrl', ->
       beforeEach ->
-        headers  = {Location: 'whatevs.co'}
-        response = headers: (key) => headers[key] # WTF, angular?
-
-        @http.post.returns @q.when(response)
+        @http.post.returns @q.when(data: {callbackUrl: 'whatevs.co'})
         @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'laptop.com'
         @rootScope.$digest()
 
@@ -41,10 +38,7 @@ describe 'AuthenticatorService', ->
 
     describe 'when called and meshblu resolves with the location', ->
       beforeEach (done) ->
-        headers  = {Location: 'google.com?some-other=stuff'}
-        response = headers: (key) => headers[key] # WTF, angular?
-
-        @http.post.returns @q.when(response)
+        @http.post.returns @q.when(data: {callbackUrl: 'google.com?some-other=stuff'})
         @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'google.com'
             .then (@result) => done()
         @rootScope.$digest()
