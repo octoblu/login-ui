@@ -13,7 +13,7 @@ describe 'AuthenticatorService', ->
   describe '->authenticate', ->
     describe 'when called with a email, password, and a callbackUrl', ->
       beforeEach ->
-        @http.post.returns @q.when( headers: {Location: 'whatevs.co'})
+        @http.post.returns @q.when(data: {callbackUrl: 'whatevs.co'})
         @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'laptop.com'
         @rootScope.$digest()
 
@@ -36,15 +36,15 @@ describe 'AuthenticatorService', ->
       it 'should reject the authenticate promise', ->
         expect(@error).to.equal 'Bad email & password'
 
-    describe 'when called and meshblu resolves with the uuid and token', ->
+    describe 'when called and meshblu resolves with the location', ->
       beforeEach (done) ->
-        @http.post.returns @q.when(headers: {Location: 'google.com'})
-        @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'laptop.com'
+        @http.post.returns @q.when(data: {callbackUrl: 'google.com?some-other=stuff'})
+        @sut.authenticate 'sliced@diced.net', 'one-easy-payment', 'google.com'
             .then (@result) => done()
         @rootScope.$digest()
 
-      it 'should return the uuid and token', ->
-        expect(@result).to.deep.equal 'google.com'
+      it 'should return the Location url', ->
+        expect(@result).to.deep.equal 'google.com?some-other=stuff'
 
   describe '->register', ->
     describe 'when called', ->
