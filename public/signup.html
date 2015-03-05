@@ -7,7 +7,7 @@
 
       <md-input-container flex>
         <label>Email</label>
-        <input type="email" name="email" ng-model="email" required>
+        <input type="email" name="email" ng-model="email" autofocus required>
         <div ng-messages="controller.signupForm.email.$error">
           <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
           <div ng-message="email" ng-show="controller.signupForm.email.$error.email">Must be a valid email address.</div>
@@ -28,15 +28,15 @@
 
         <div ng-messages="controller.signupForm.confirmPassword.$error">
           <div ng-message="required" ng-show="controller.signupForm.confirmPassword.$error.required && controller.signupForm.confirmPassword.$touched">Required.</div>
-          <div ng-message="match" ng-show="controller.signupForm.confirmPassword.$error.match">Passwords don't match.</div>
+          <div ng-message="match" ng-show="controller.signupForm.confirmPassword.$error.matchError">Passwords don't match.</div>
         </div>
       </md-input-container>
 
-      <div class="pin-button-container">
-        <md-button class="md-primary md-raised signup-button">Sign Up</md-button>
-      </div>
+      <p class="error-text">{{controller.errorMessage}}</p>
 
-      <p class="text-center text-warning">{{controller.errorMessage}}</p>
+      <div class="pin-button-container">
+        <md-button ng-disabled="controller.loading" class="md-primary md-raised signup-button">Sign Up</md-button>
+      </div>
     </form>
   </div>
 </md-content>
