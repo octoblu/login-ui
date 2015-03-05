@@ -14,7 +14,7 @@ class AuthenticatorService
         callbackUrl: callbackUrl
       }
       .then (result) =>
-        result.headers.Location
+        result.headers 'Location'
       .catch (result) =>
         @q.reject result.data
 
