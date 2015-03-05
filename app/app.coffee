@@ -3,7 +3,7 @@ angular
 .config ($routeProvider, $locationProvider, $mdThemingProvider) ->
   $mdThemingProvider.theme('octo-blue')
 
-  $locationProvider.html5Mode 
+  $locationProvider.html5Mode
     enabled: true
     requireBase: false
 
@@ -15,6 +15,10 @@ angular
     .when '/signup',
       templateUrl: '/signup.html'
       controller:  'SignupController'
+      controllerAs: 'controller'
+    .when '/forgot',
+      templateUrl: '/forgot-password.html'
+      controller:  'ForgotPasswordController'
       controllerAs: 'controller'
     .otherwise redirectTo: '/'
 .run ($rootScope, $location) ->
