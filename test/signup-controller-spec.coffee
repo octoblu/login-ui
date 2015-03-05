@@ -14,7 +14,6 @@ describe 'SignupController', ->
         $window: @window
         $scope: @rootScope.$new()
 
-
   it 'should exist', ->
     expect(@sut).to.exist
 

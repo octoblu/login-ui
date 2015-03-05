@@ -1,7 +1,8 @@
 class LoginController
-  constructor: ($routeParams, AuthenticatorService) ->
-    @AuthenticatorService = AuthenticatorService
+  constructor: ($routeParams, $window, AuthenticatorService) ->
     @routeParams = $routeParams
+    @window = $window
+    @AuthenticatorService = AuthenticatorService
 
   emailRequiredError: =>
     return true if @loginForm.email.$error.required && @loginForm.email.$touched
@@ -16,10 +17,14 @@ class LoginController
     @loginForm.password.$setTouched()
     return unless @loginForm.$valid
 
+    callbackUrl = @routeParams.callback ? 'https://app.octoblu.com/api/session'
+
     @loading = true
     @AuthenticatorService
-      .authenticate email, password, @routeParams.callback
-      .then (error) =>
+      .authenticate email, password, callbackUrl
+      .then (location) =>
+        @window.location = location
+      .catch (error) =>
         @loading = false
         @errorMessage = error
 

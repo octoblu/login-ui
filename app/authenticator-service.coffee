@@ -1,21 +1,26 @@
 class AuthenticatorService
+  @HOST: "https://email-password.octoblu.com"
+  # @HOST: "http://localhost:3003"
+
   constructor: ($q, $http) ->
     @q = $q
     @http = $http
 
   authenticate: (email, password, callbackUrl) =>
     @http
-      .post 'https://email-password.octoblu.com/sessions', {
+      .post "#{AuthenticatorService.HOST}/sessions", {
         email: email
         password: password
         callbackUrl: callbackUrl
       }
+      .then (result) =>
+        result.headers.location
       .catch (result) =>
-        result.data
+        @q.reject result.data
 
   register: (email, password) =>
     @http
-      .post 'https://email-password.octoblu.com/devices', {
+      .post "#{AuthenticatorService.HOST}/devices", {
         email: email
         password: password
       }
