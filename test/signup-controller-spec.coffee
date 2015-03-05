@@ -5,12 +5,14 @@ describe 'SignupController', ->
     inject ($controller, $q, $rootScope, $window) ->
       @q = $q
       @rootScope = $rootScope
+      @scope = $rootScope.$new()
       @routeParams = redirect: "https://app.octoblu.com/api/sessions"
       @window = location: sinon.stub()
       @AuthenticatorService = register: sinon.stub().returns @q.when()
       @sut = $controller 'SignupController',
         AuthenticatorService: @AuthenticatorService
         $routeParams: @routeParams
+        $scope: @scope
         $window: @window
 
 
@@ -21,8 +23,8 @@ describe 'SignupController', ->
     expect(@sut.signup).to.exist
 
   describe 'when the signup function is called', ->
-    describe 'when the email address is empty', -> 
-      beforeEach -> 
+    describe 'when the email address is empty', ->
+      beforeEach ->
         @email = ''
         @password = '1234'
         @confirmPassword = '1234'
@@ -32,18 +34,18 @@ describe 'SignupController', ->
       it 'should set the errorMessage to say the email field cannot be blank', ->
         expect(@sut.errorMessage).to.deep.equal "Please enter a valid email address"
 
-    describe 'when the email address is not empty', -> 
-      beforeEach -> 
+    describe 'when the email address is not empty', ->
+      beforeEach ->
         @email = 'sabotage@roller.coaster'
         @password = '1234'
         @confirmPassword = '1234'
         @sut.signup @email, @password, @confirmPassword
         return
-      
+
       it 'should not set the errorMessage', ->
         expect(@sut.errorMessage).to.not.exist
 
-    describe 'when the password is empty', -> 
+    describe 'when the password is empty', ->
       beforeEach ->
         @email = 'radiation@practical.joke'
         @password = ''
@@ -103,8 +105,3 @@ describe 'SignupController', ->
 
       it 'should set the errorMessage', ->
         expect(@sut.errorMessage).to.deep.equal "Error registering with meshblu"
-
-
-
-
-
