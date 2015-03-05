@@ -18,11 +18,12 @@ class AuthenticatorService
       .catch (result) =>
         @q.reject result.data
 
-  register: (email, password) =>
+  register: (email, password, callbackUrl) =>
     @http
       .post "#{AuthenticatorService.HOST}/devices", {
         email: email
         password: password
+        callbackUrl: callbackUrl
       }
       .then (result) =>
         result.data.callbackUrl
