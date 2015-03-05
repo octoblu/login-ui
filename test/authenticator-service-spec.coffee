@@ -49,8 +49,8 @@ describe 'AuthenticatorService', ->
   describe '->register', ->
     describe 'when called', ->
       beforeEach ->
-        @http.post.returns @q.when({})
-        @sut.register 'taft@president.org', 'bathtub'
+        @http.post.returns @q.when(data: {callbackUrl: 'something.biz'})
+        @sut.register 'taft@president.org', 'bathtub', 'underwater.dive'
         @rootScope.$digest()
 
       it 'should post to signup.octoblu.com with the email and password', ->
@@ -58,14 +58,57 @@ describe 'AuthenticatorService', ->
         params =
           email: 'taft@president.org'
           password: 'bathtub'
+          callbackUrl: 'underwater.dive'
         expect(@http.post).to.have.been.calledWith url, params
 
     describe 'when called and the service rejects', ->
       beforeEach (done) ->
         @http.post.returns @q.reject({data: 'you done screwed up'})
-        @sut.register 'complicated', 'dolphin'
-            .then (@errorMessage) => done()
+        @sut.register 'complicated', 'dolphin', 'rockslide.gz'
+            .catch (@errorMessage) => done()
         @rootScope.$digest()
 
       it 'should reject the promise and return the error', ->
         expect(@errorMessage).to.equal 'you done screwed up'
+
+    describe 'when called and the service resolves', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when(data: {callbackUrl: 'die.cool'})
+        @sut.register 'crippling', 'insecurity', 'sucked-out'
+            .then (@result) => done()
+        @rootScope.$digest()
+
+      it 'should reject the promise and return the error', ->
+        expect(@result).to.equal 'die.cool'
+
+  describe '->forgotPassword', ->
+    describe 'when called with an email', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when( data: 'hello' )
+        @sut.forgotPassword('peter@improved-bacon.com').then (@response) => done()
+        @rootScope.$digest()
+
+      it 'should post to http with a request to email-password.octoblu.com/forgot', ->
+        url = 'https://email-password.octoblu.com/forgot'
+        params =
+          email: 'peter@improved-bacon.com'
+        expect(@http.post).to.have.been.calledWith url, params
+
+      it 'should resolve the data', ->
+        expect(@response).to.equal 'hello'
+
+
+    describe 'when called with an email and http resolves a different result', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when( data: 'goodbye!' )
+        @sut.forgotPassword('peter@improved-bacon.com').then (@response) => done()
+        @rootScope.$digest()
+
+      it 'should post to http with a request to email-password.octoblu.com/forgot', ->
+        url = 'https://email-password.octoblu.com/forgot'
+        params =
+          email: 'peter@improved-bacon.com'
+        expect(@http.post).to.have.been.calledWith url, params
+
+      it 'should resolve the data', ->
+        expect(@response).to.equal 'goodbye!'
