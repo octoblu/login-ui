@@ -24,8 +24,10 @@ class AuthenticatorService
         email: email
         password: password
       }
+      .then (result) =>
+        result.data.callbackUrl
       .catch (result) =>
-        result.data
+        @q.reject result.data
 
   passwordMatches: (password, confirmPassword) =>
     password != confirmPassword

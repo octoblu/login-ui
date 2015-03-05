@@ -49,7 +49,7 @@ describe 'AuthenticatorService', ->
   describe '->register', ->
     describe 'when called', ->
       beforeEach ->
-        @http.post.returns @q.when({})
+        @http.post.returns @q.when(data: {callbackUrl: 'something.biz'})
         @sut.register 'taft@president.org', 'bathtub'
         @rootScope.$digest()
 
@@ -64,8 +64,18 @@ describe 'AuthenticatorService', ->
       beforeEach (done) ->
         @http.post.returns @q.reject({data: 'you done screwed up'})
         @sut.register 'complicated', 'dolphin'
-            .then (@errorMessage) => done()
+            .catch (@errorMessage) => done()
         @rootScope.$digest()
 
       it 'should reject the promise and return the error', ->
         expect(@errorMessage).to.equal 'you done screwed up'
+    
+    describe 'when called and the service resolves', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when(data: {callbackUrl: 'die.cool'})
+        @sut.register 'crippling', 'insecurity'
+            .then (@result) => done()
+        @rootScope.$digest()
+
+      it 'should reject the promise and return the error', ->
+        expect(@result).to.equal 'die.cool'
