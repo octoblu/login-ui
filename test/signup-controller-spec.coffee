@@ -12,6 +12,7 @@ describe 'SignupController', ->
         AuthenticatorService: @AuthenticatorService
         $routeParams: @routeParams
         $window: @window
+        $scope: @rootScope.$new()
 
 
   it 'should exist', ->
