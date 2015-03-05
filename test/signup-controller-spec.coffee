@@ -14,6 +14,7 @@ describe 'SignupController', ->
         $routeParams: @routeParams
         $scope: @scope
         $window: @window
+        $scope: @rootScope.$new()
 
 
   it 'should exist', ->
