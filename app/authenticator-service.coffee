@@ -38,5 +38,10 @@ class AuthenticatorService
       .then (result) =>
         return result.data
 
+  resetPassword: (device, token, password) =>
+    @http.post("#{AuthenticatorService.HOST}/reset", device: device, token: token, password: password)
+      .then (result) =>
+        return result.data
+
 angular.module('email-password').service 'AuthenticatorService', AuthenticatorService
 

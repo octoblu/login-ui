@@ -112,3 +112,40 @@ describe 'AuthenticatorService', ->
 
       it 'should resolve the data', ->
         expect(@response).to.equal 'goodbye!'
+
+  describe '->resetPassword', ->
+    describe 'when called with an email', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when( data: 'hello' )
+        @sut.resetPassword('death-from-above', 'attack', 'vantage-point').then (@response) => done()
+        @rootScope.$digest()
+
+      it 'should post to http with a request to email-password.octoblu.com/reset', ->
+        url = 'https://email-password.octoblu.com/reset'
+        params =
+          device: 'death-from-above'
+          token: 'attack'
+          password: 'vantage-point'
+
+        expect(@http.post).to.have.been.calledWith url, params
+
+      it 'should resolve the data', ->
+        expect(@response).to.equal 'hello'
+
+    describe 'when called with an email and http resolves a different result', ->
+      beforeEach (done) ->
+        @http.post.returns @q.when( data: 'goodbye!' )
+        @sut.resetPassword('shriek attack', 'startle', 'any person').then (@response) => done()
+        @rootScope.$digest()
+
+      it 'should post to http with a request to email-password.octoblu.com/reset', ->
+        url = 'https://email-password.octoblu.com/reset'
+        params =
+          device: 'shriek attack'
+          token: 'startle'
+          password: 'any person'
+
+        expect(@http.post).to.have.been.calledWith url, params
+
+      it 'should resolve the data', ->
+        expect(@response).to.equal 'goodbye!'
