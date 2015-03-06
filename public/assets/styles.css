@@ -1,4 +1,4 @@
-.signup-card {
+.login-card {
   flex: 1;
   max-width: 18em;
   font-size: 1.2em;
@@ -27,9 +27,18 @@
 }
 
 .user-form {
-  margin-bottom: 2em;
+  margin-bottom: 1.2em;
 }
 
 .text-center {
   text-align: center;
+}
+
+.forgot-password {
+  color: #196bb3;
+  font-size: 12px;
+  text-decoration: none;
+
+  float: right;
+  line-height: 24px;
 }

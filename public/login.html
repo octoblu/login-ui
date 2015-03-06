@@ -1,5 +1,5 @@
 <md-content layout="row" layout-align="center">
-  <div class="signup-card" layout="column">
+  <div class="login-card" layout="column">
     <img class="octoblu-logo" src="/assets/images/octoblucircle.png">
 
     <form name="controller.loginForm" class="user-form" ng-submit="controller.login(email, password)" novalidate>
@@ -20,18 +20,18 @@
         <input type="password" ng-model="password" name="password" required>
         <div ng-messages="controller.loginForm.password.$error">
           <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
+          <small><a href="/forgot" class="forgot-password">Forgot Password?</a></small>
         </div>
       </md-input-container>
 
       <p class="error-text">{{controller.errorMessage}}</p>
 
-      <div class="pin-button-container" layout="column">
+      <div layout="column">
         <md-button ng-disabled="controller.loading" class="md-primary md-raised">Login</md-button>
       </div>
 
     </form>
 
     <md-button class="md-primary" href="/signup">Create an Account</md-button>
-    <small class="text-center"><a href="/forgot">Forgot Password?</a></small>
   </div>
 </md-content>

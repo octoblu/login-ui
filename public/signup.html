@@ -1,8 +1,8 @@
 <md-content layout="row" layout-align="center">
-  <div class="signup-card">
+  <div class="login-card" layout="column">
     <img class="octoblu-logo" src="/assets/images/octoblucircle.png">
 
-    <form name="controller.signupForm" ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
+    <form name="controller.signupForm" class="user-form" ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
       <h3 class="form-header">Sign up</h3>
 
       <md-input-container flex>
@@ -34,9 +34,10 @@
 
       <p class="error-text">{{controller.errorMessage}}</p>
 
-      <div class="pin-button-container">
+      <div>
         <md-button ng-disabled="controller.loading" class="md-primary md-raised signup-button">Sign Up</md-button>
       </div>
     </form>
+    <md-button class="md-primary" href="/">Login</md-button>
   </div>
 </md-content>
