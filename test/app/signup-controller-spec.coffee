@@ -68,7 +68,7 @@ describe 'SignupController', ->
         @email = "faulty@machinery"
         @password = "execution"
         @sut.formIsValid = sinon.stub().returns true
-        @AuthenticatorService.register.returns @q.reject(new Error('oh no'))
+        @AuthenticatorService.register.returns @q.reject(error: new Error('oh no'))
         @sut.signup @email, @password, @password
         @rootScope.$digest()
 
@@ -76,4 +76,4 @@ describe 'SignupController', ->
         expect(@sut.formIsValid).to.have.been.called
 
       it 'should set the errorMessage', ->
-        expect(@sut.errorMessage).to.deep.equal 'Error registering with meshblu'
+        expect(@sut.errorMessage).to.deep.equal new Error('oh no')

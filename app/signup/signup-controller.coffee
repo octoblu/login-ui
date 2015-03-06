@@ -28,9 +28,9 @@ class SignupController
       .register(email, password, callbackUrl)
       .then (result) =>
         @window.location = result
-      .catch =>
+      .catch (response) =>
         @loading = false
-        @errorMessage = SignupController.ERROR_REGISTERING
+        @errorMessage = response.error
 
   verifyPasswordMatch: =>
     if @scope.confirmPassword?.length && @scope.password != @scope.confirmPassword
