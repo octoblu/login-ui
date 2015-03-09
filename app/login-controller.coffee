@@ -6,7 +6,7 @@ class LoginController
 
   emailRequiredError: =>
     return true if @loginForm.email.$error.required && @loginForm.email.$touched
-    return true if @loginForm.$submitted
+    return true if @loginForm.$submitted && !@loginForm.email
 
   passwordRequiredError: =>
     return true if @loginForm.password.$error.required && @loginForm.password.$touched
