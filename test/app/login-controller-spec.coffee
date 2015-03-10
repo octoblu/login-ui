@@ -8,7 +8,8 @@ describe 'LoginController', ->
       @AuthenticatorService = authenticate: sinon.stub().returns @q.when()
       @routeParams = {}
       @window = {}
-      @sut = $controller 'LoginController',
+      @controller = $controller
+      @sut = @controller 'LoginController',
         $routeParams: @routeParams
         $window: @window
         AuthenticatorService: @AuthenticatorService
@@ -17,19 +18,53 @@ describe 'LoginController', ->
         email: {'$setTouched': =>}
         password: {'$setTouched': =>}
 
+  describe '->constructor', ->
+    describe 'when instantiated', ->
+      beforeEach ->
+        @routeParams.callback = 'http%3A%2F%2Fsomething.cool.really.cool'
+        @sut = @controller 'LoginController',
+          $routeParams: @routeParams
+          $window: @window
+          AuthenticatorService: @AuthenticatorService
+        @sut.loginForm =
+          $valid: true
+          email: {'$setTouched': =>}
+          password: {'$setTouched': =>}
+
+      it 'should set the signupPath', ->
+        expect(@sut.signupPath).to.equal '/signup?callback=http%3A%2F%2Fsomething.cool.really.cool'
+
   describe '->login', ->
     describe 'when routeParams no has a callback url', ->
+      beforeEach ->
+        @sut = @controller 'LoginController',
+          $routeParams: @routeParams
+          $window: @window
+          AuthenticatorService: @AuthenticatorService
+        @sut.loginForm =
+          $valid: true
+          email: {'$setTouched': =>}
+          password: {'$setTouched': =>}
+
       describe 'when called with a email and password', ->
         beforeEach ->
           @sut.login 'r@go.co', 'sliced'
           @rootScope.$digest()
 
         it 'should call AuthenticatorService.authenticate with the email, password, and default callback', ->
-          expect(@AuthenticatorService.authenticate).to.have.been.calledWith 'r@go.co', 'sliced', 'https://app.octoblu.com/api/session'
+          expect(@AuthenticatorService.authenticate).to.have.been.calledWith 'r@go.co', 'sliced', 'https%3A%2F%2Fapp.octoblu.com%2Fapi%2Fsession'
 
     describe 'when routeParams has a callback url', ->
       beforeEach ->
         @routeParams.callback = 'zombo.com'
+        @sut = @controller 'LoginController',
+          $routeParams: @routeParams
+          $window: @window
+          AuthenticatorService: @AuthenticatorService
+        @sut.loginForm =
+          $valid: true
+          email: {'$setTouched': =>}
+          password: {'$setTouched': =>}
 
       describe 'when called with a email and password', ->
         beforeEach ->
@@ -42,6 +77,14 @@ describe 'LoginController', ->
     describe 'when routeParams has a callback url', ->
       beforeEach ->
         @routeParams.callback = 'cats.com'
+        @sut = @controller 'LoginController',
+          $routeParams: @routeParams
+          $window: @window
+          AuthenticatorService: @AuthenticatorService
+        @sut.loginForm =
+          $valid: true
+          email: {'$setTouched': =>}
+          password: {'$setTouched': =>}
 
       describe 'when called with a email and password', ->
         beforeEach ->

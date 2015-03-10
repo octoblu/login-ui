@@ -12,6 +12,8 @@ class SignupController
 
     $scope.$watch 'password', @verifyPasswordMatch, true
     $scope.$watch 'confirmPassword', @verifyPasswordMatch, true
+    @callbackUrl = @routeParams.callback ? 'https%3A%2F%2Fapp.octoblu.com%2Fapi%2Fsession'
+    @loginPath = "/?callback=" + @callbackUrl
 
   signup: (email, password, confirmPassword) =>
     @signupForm.email.$setTouched()
@@ -22,10 +24,9 @@ class SignupController
 
     @loading = true
 
-    callbackUrl = @routeParams.callback ? 'https://app.octoblu.com/api/session'
 
     @AuthenticatorService
-      .register(email, password, callbackUrl)
+      .register(email, password, @callbackUrl)
       .then (result) =>
         @window.location = result
       .catch (response) =>

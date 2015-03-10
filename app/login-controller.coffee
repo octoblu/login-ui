@@ -3,6 +3,8 @@ class LoginController
     @routeParams = $routeParams
     @window = $window
     @AuthenticatorService = AuthenticatorService
+    @callbackUrl = @routeParams.callback ? 'https%3A%2F%2Fapp.octoblu.com%2Fapi%2Fsession'
+    @signupPath = "/signup?callback=" + @callbackUrl
 
   emailRequiredError: =>
     return true if @loginForm.email.$error.required && @loginForm.email.$touched
@@ -17,11 +19,9 @@ class LoginController
     @loginForm.password.$setTouched()
     return unless @loginForm.$valid
 
-    callbackUrl = @routeParams.callback ? 'https://app.octoblu.com/api/session'
-
     @loading = true
     @AuthenticatorService
-      .authenticate email, password, callbackUrl
+      .authenticate email, password, @callbackUrl
       .then (location) =>
         @window.location = location
       .catch (error) =>
