@@ -3,6 +3,7 @@ describe 'AuthenticatorService', ->
     module 'email-password', ($provide) =>
       @http = post: sinon.stub()
       $provide.value '$http', @http
+      $provide.constant 'AUTHENTICATOR_URI', 'https://email-password.octoblu.com'
       return
 
     inject ($q, $rootScope, AuthenticatorService) =>

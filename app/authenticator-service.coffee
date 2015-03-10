@@ -1,14 +1,15 @@
 class AuthenticatorService
-  @HOST: "https://email-password.octoblu.com"
+  # @HOST: "https://email-password.octoblu.com"
   # @HOST: "http://localhost:3003"
 
-  constructor: ($q, $http) ->
+  constructor: ($q, $http, AUTHENTICATOR_URI) ->
     @q = $q
     @http = $http
+    @AUTHENTICATOR_URI = AUTHENTICATOR_URI
 
   authenticate: (email, password, callbackUrl) =>
     @http
-      .post "#{AuthenticatorService.HOST}/sessions", {
+      .post "#{@AUTHENTICATOR_URI}/sessions", {
         email: email
         password: password
         callbackUrl: callbackUrl
@@ -20,7 +21,7 @@ class AuthenticatorService
 
   register: (email, password, callbackUrl) =>
     @http
-      .post "#{AuthenticatorService.HOST}/devices", {
+      .post "#{@AUTHENTICATOR_URI}/devices", {
         email: email
         password: password
         callbackUrl: callbackUrl
@@ -34,12 +35,12 @@ class AuthenticatorService
     password != confirmPassword
 
   forgotPassword: (email) =>
-    @http.post("#{AuthenticatorService.HOST}/forgot", email: email)
+    @http.post("#{@AUTHENTICATOR_URI}/forgot", email: email)
       .then (result) =>
         return result.data
 
   resetPassword: (device, token, password) =>
-    @http.post("#{AuthenticatorService.HOST}/reset", device: device, token: token, password: password)
+    @http.post("#{@AUTHENTICATOR_URI}/reset", device: device, token: token, password: password)
       .then (result) =>
         return result.data
 

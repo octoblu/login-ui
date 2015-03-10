@@ -41,6 +41,11 @@ gulp.task 'webserver', ->
         fallback: 'index.html'
       })
 
+gulp.task 'config:create', ->
+  environment = process.env.NODE_ENV ? 'development'
+  gulp.src "./app/config/#{environment}.coffee"
+    .pipe gulp.dest('./app/config/index.coffee')
+
 gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
 
 gulp.task 'watch', ['default', 'webserver'], ->
