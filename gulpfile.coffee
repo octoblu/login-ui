@@ -24,11 +24,10 @@ gulp.task 'bower:css', ['bower'], ->
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
-gulp.task 'config:create', ->
   environment = process.env.NODE_ENV ? 'development'
   configFile = "./config/#{environment}.coffee"
 
-  files = [configFile, './app/**/*.coffee']
+  files = ['./app/**/*.coffee', configFile]
 
   gulp.src files
       .pipe plumber()
