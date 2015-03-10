@@ -24,7 +24,13 @@ gulp.task 'bower:css', ['bower'], ->
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
-  gulp.src './app/**/*.coffee'
+gulp.task 'config:create', ->
+  environment = process.env.NODE_ENV ? 'development'
+  configFile = "./config/#{environment}.coffee"
+
+  files = [configFile, './app/**/*.coffee']
+
+  gulp.src files
       .pipe plumber()
       .pipe coffee()
       .pipe concat('application.js')
@@ -40,11 +46,6 @@ gulp.task 'webserver', ->
         open: false
         fallback: 'index.html'
       })
-
-gulp.task 'config:create', ->
-  environment = process.env.NODE_ENV ? 'development'
-  gulp.src "./app/config/#{environment}.coffee"
-    .pipe gulp.dest('./app/config/index.coffee')
 
 gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
 
