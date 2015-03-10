@@ -24,7 +24,14 @@ gulp.task 'bower:css', ['bower'], ->
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
-  environment = process.env.NODE_ENV ? 'development'
+  if process.env.TRAVIS_BUILD
+    switch process.env.TRAVIS_BUILD
+      when 'master' then environment = 'production'
+      when 'staging' then environment = 'staging'
+      else environment = 'production'
+  else
+    environment = process.env.NODE_ENV ? 'development'
+
   configFile = "./config/#{environment}.coffee"
 
   files = ['./app/**/*.coffee', configFile]
