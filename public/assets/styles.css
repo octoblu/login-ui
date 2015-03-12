@@ -1,3 +1,14 @@
+.login-notice {
+  font-size: 14px;
+  background: #FFFDE7;
+  border: 1px solid #FFF59D;
+  padding: 0 10px;
+}
+
+.login-notice p {
+    line-height: 1.5;
+}
+
 .login-card, .signup-card {
   flex: 1;
   max-width: 18em;
@@ -18,7 +29,7 @@
 
 .octoblu-logo {
   display:block;
-  margin: 3em auto 2em;
+  margin: 2em auto;
 }
 
 .signup-button {

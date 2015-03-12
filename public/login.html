@@ -2,6 +2,10 @@
   <div class="login-card" layout="column">
     <img class="octoblu-logo" src="/assets/images/octoblucircle.png">
 
+    <div layout="row" class="login-notice">
+      <p>Due to the recent <a href="http://blogs.citrix.com/2015/03/10/octoblu-is-rolling-out-a-new-authentication-system/" target="_blank">security upgrades</a>, you may need to <a href="/forgot">reset your password</a> before logging in.</p>
+    </div>
+
     <form name="controller.loginForm" class="user-form" ng-submit="controller.login(email, password)" novalidate>
       <h3 class="form-header">Login</h3>
 
