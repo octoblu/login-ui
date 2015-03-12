@@ -23,7 +23,6 @@ deploy:
     app-id: f38cccd6-515e-4dbd-ba06-883809c5ea19
     on:
       branch: master
-deploy:
   - provider: s3
     access_key_id: AKIAIT4X4NDGM2WVL6VA
     secret_access_key:
