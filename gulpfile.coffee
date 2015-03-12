@@ -39,6 +39,7 @@ gulp.task 'coffee:compile', ->
 gulp.task 'webserver', ->
   gulp.src './public'
       .pipe webserver({
+        host: '0.0.0.0'
         port: 8888
         livereload: false
         directoryListing: false
@@ -50,5 +51,4 @@ gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
 
 gulp.task 'watch', ['default', 'webserver'], ->
   gulp.watch ['./bower.json'], ['bower:concat', 'bower:css']
-  gulp.watch ['./public/app/**/*.js'], ['javascript:concat']
-  gulp.watch ['./app/**/*.coffee'], ['coffee:compile']
+  gulp.watch ['./app/**/*.coffee','./config/**/*.coffee'], ['coffee:compile']
