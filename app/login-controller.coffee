@@ -26,6 +26,6 @@ class LoginController
         @window.location = location
       .catch (error) =>
         @loading = false
-        @errorMessage = error
+        @errorMessage = 'That email/password combination does not match our records'
 
 angular.module('email-password').controller 'LoginController', LoginController
