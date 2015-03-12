@@ -31,3 +31,4 @@ lib
 public/assets/dist
 .DS_STORE
 app/.DS_STORE
+meshblu.json

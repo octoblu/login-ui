@@ -101,7 +101,7 @@ describe 'LoginController', ->
         @rootScope.$digest()
 
       it 'should add ERROR to the errorMessage on the scope', ->
-        expect(@sut.errorMessage).to.equal 'ERROR'
+        expect(@sut.errorMessage).to.equal 'That email/password combination does not match our records'
 
     describe 'when called and authenticate resolves', ->
       beforeEach ->

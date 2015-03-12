@@ -1,4 +1,4 @@
-.login-card {
+.login-card, .signup-card {
   flex: 1;
   max-width: 18em;
   font-size: 1.2em;
