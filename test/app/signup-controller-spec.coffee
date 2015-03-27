@@ -43,7 +43,7 @@ describe 'SignupController', ->
         expect(@sut.formIsValid).to.have.been.called
 
       it 'should call the signup service', ->
-        expect(@AuthenticatorService.register).to.have.been.calledWith @email, @password, 'https%3A%2F%2Fapp.octoblu.com%2Fapi%2Fsession'
+        expect(@AuthenticatorService.register).to.have.been.calledWith @email, @password, 'https://app.octoblu.com/api/session'
 
     describe 'when AuthenticatorService resolves the promise', ->
       beforeEach ->

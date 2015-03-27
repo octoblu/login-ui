@@ -21,7 +21,7 @@ describe 'LoginController', ->
   describe '->constructor', ->
     describe 'when instantiated', ->
       beforeEach ->
-        @routeParams.callback = 'http%3A%2F%2Fsomething.cool.really.cool'
+        @routeParams.callback = 'http://something.cool.really.cool'
         @sut = @controller 'LoginController',
           $routeParams: @routeParams
           $window: @window
@@ -52,7 +52,7 @@ describe 'LoginController', ->
           @rootScope.$digest()
 
         it 'should call AuthenticatorService.authenticate with the email, password, and default callback', ->
-          expect(@AuthenticatorService.authenticate).to.have.been.calledWith 'r@go.co', 'sliced', 'https%3A%2F%2Fapp.octoblu.com%2Fapi%2Fsession'
+          expect(@AuthenticatorService.authenticate).to.have.been.calledWith 'r@go.co', 'sliced', 'https://app.octoblu.com/api/session'
 
     describe 'when routeParams has a callback url', ->
       beforeEach ->
