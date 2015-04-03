@@ -1,10 +1,10 @@
 {
   "name": "email-password-site",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Front end for email and password authenticator",
   "main": "index.js",
   "scripts": {
-    "start": "gulp watch",
+    "start": "gulp webserver",
     "test": "gulp && node_modules/karma/bin/karma start --single-run"
   },
   "repository": {
