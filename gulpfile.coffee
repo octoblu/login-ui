@@ -36,7 +36,10 @@ gulp.task 'coffee:compile', ->
       .pipe sourcemaps.write('.')
       .pipe gulp.dest('./public/assets/dist/')
 
-gulp.task 'webserver', ->
+
+gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
+
+gulp.task 'webserver', ['default'], ->
   gulp.src './public'
       .pipe webserver({
         host: '0.0.0.0'
@@ -47,8 +50,6 @@ gulp.task 'webserver', ->
         fallback: 'index.html'
       })
 
-gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
-
-gulp.task 'watch', ['default', 'webserver'], ->
+gulp.task 'watch', ['webserver'], ->
   gulp.watch ['./bower.json'], ['bower:concat', 'bower:css']
   gulp.watch ['./app/**/*.coffee','./config/**/*.coffee'], ['coffee:compile']
