@@ -8,6 +8,7 @@ describe 'ForgotPasswordController', ->
       @AuthenticatorService = forgotPassword: sinon.stub().returns(@q.when())
       @sut = $controller 'ForgotPasswordController',
         AuthenticatorService: @AuthenticatorService
+        $routeParams: {}
 
   describe '->forgotPassword', ->
 
@@ -50,4 +51,3 @@ describe 'ForgotPasswordController', ->
 
       it "should add an errorMessage", ->
         expect(@sut.errorMessage).to.equal 'Error resetting your password'
-
