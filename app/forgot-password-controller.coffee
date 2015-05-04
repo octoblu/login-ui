@@ -1,6 +1,8 @@
 class ForgotPasswordController
-  constructor: (AuthenticatorService) ->
+  constructor: (AuthenticatorService, $routeParams) ->
     @AuthenticatorService = AuthenticatorService
+    @callbackUrl = $routeParams.callback ? 'https://app.octoblu.com/api/session'
+    @loginPath = "/?" + $.param(callback: @callbackUrl)
 
   forgotPassword: (email) =>
     @AuthenticatorService.forgotPassword(email)

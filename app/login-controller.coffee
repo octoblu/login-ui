@@ -5,6 +5,7 @@ class LoginController
     @AuthenticatorService = AuthenticatorService
     @callbackUrl = @routeParams.callback ? 'https://app.octoblu.com/api/session'
     @signupPath = "/signup?" + $.param(callback: @callbackUrl)
+    @forgotPath = "/forgot?" + $.param(callback: @callbackUrl)
 
   emailRequiredError: =>
     return true if @loginForm.email.$error.required && @loginForm.email.$touched

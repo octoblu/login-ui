@@ -1,3 +1,17 @@
+.main-container {
+  .flex-display;
+  .justify-content(center);
+
+  .forgot-password-card,
+  .login-card,
+  .signup-card {
+    .flex;
+
+    width: 25em;
+    font-size: 1.2em;
+  }
+}
+
 .login-notice {
   font-size: 14px;
   background: #FFFDE7;
@@ -6,13 +20,7 @@
 }
 
 .login-notice p {
-    line-height: 1.5;
-}
-
-.login-card, .signup-card {
-  flex: 1;
-  max-width: 18em;
-  font-size: 1.2em;
+  line-height: 1.5;
 }
 
 .error-text {
@@ -27,14 +35,20 @@
   text-transform: uppercase;
 }
 
-.octoblu-logo {
-  display:block;
-  margin: 2em auto;
+.logo-container {
+  margin-top: 2em;
+  text-align: center;
 }
 
 .signup-button {
   width: 100%;
   text-align: center;
+}
+
+.login-button-container,
+.signup-button-container {
+  .flex-display;
+  .flex-direction(column);
 }
 
 .user-form {

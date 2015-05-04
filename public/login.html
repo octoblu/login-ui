@@ -1,40 +1,38 @@
-<md-content layout="row" layout-align="center">
-  <div class="login-card" layout="column">
-    <img class="octoblu-logo" src="/assets/images/octoblucircle.png">
+<div class="login-card">
+  <div class="logo-container">
+    <img src="/assets/images/octoblucircle.png">
+  </div>
 
-    <div layout="row" class="login-notice">
-      <p>Due to the recent <a href="http://blogs.citrix.com/2015/03/10/octoblu-is-rolling-out-a-new-authentication-system/" target="_blank">security upgrades</a>, you may need to <a href="/forgot">reset your password</a> before logging in.</p>
+  <form name="controller.loginForm" class="user-form" ng-submit="controller.login(email, password)" novalidate>
+    <h3 class="form-header">Login</h3>
+
+    <md-input-container flex>
+      <label>Email</label>
+      <input type="email" ng-model="email" name="email" required>
+      <div ng-messages="controller.loginForm.email.$error">
+        <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
+        <div ng-message="email" ng-show="controller.loginForm.email.$error.email">Must be a valid email address.</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container flex>
+      <label>Password</label>
+      <input type="password" ng-model="password" name="password" required>
+      <div ng-messages="controller.loginForm.password.$error">
+        <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
+        <small><a ng-href="{{controller.forgotPath}}" class="forgot-password">Forgot Password?</a></small>
+      </div>
+    </md-input-container>
+
+    <p class="error-text">{{controller.errorMessage}}</p>
+
+    <div layout="column">
+      <md-button ng-disabled="controller.loading" class="md-primary md-raised">Login</md-button>
     </div>
 
-    <form name="controller.loginForm" class="user-form" ng-submit="controller.login(email, password)" novalidate>
-      <h3 class="form-header">Login</h3>
+  </form>
 
-      <md-input-container flex>
-        <label>Email</label>
-        <input type="email" ng-model="email" name="email" required>
-        <div ng-messages="controller.loginForm.email.$error">
-          <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
-          <div ng-message="email" ng-show="controller.loginForm.email.$error.email">Must be a valid email address.</div>
-        </div>
-      </md-input-container>
-
-      <md-input-container flex>
-        <label>Password</label>
-        <input type="password" ng-model="password" name="password" required>
-        <div ng-messages="controller.loginForm.password.$error">
-          <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
-          <small><a href="/forgot" class="forgot-password">Forgot Password?</a></small>
-        </div>
-      </md-input-container>
-
-      <p class="error-text">{{controller.errorMessage}}</p>
-
-      <div layout="column">
-        <md-button ng-disabled="controller.loading" class="md-primary md-raised">Login</md-button>
-      </div>
-
-    </form>
-
+  <div class="signup-button-container">
     <md-button class="md-primary" ng-href="{{controller.signupPath}}">Create an Account</md-button>
   </div>
-</md-content>
+</div>

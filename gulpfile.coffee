@@ -4,6 +4,7 @@ concat         = require 'gulp-concat'
 plumber        = require 'gulp-plumber'
 sourcemaps     = require 'gulp-sourcemaps'
 coffee         = require 'gulp-coffee'
+less           = require 'gulp-less'
 webserver      = require 'gulp-webserver'
 _              = require 'lodash'
 mainBowerFiles = require 'main-bower-files'
@@ -19,8 +20,13 @@ gulp.task 'bower:concat', ['bower'], ->
       .pipe sourcemaps.write('.')
       .pipe gulp.dest('./public/assets/dist/')
 
-gulp.task 'bower:css', ['bower'], ->
-  gulp.src [ './lib/angular-material/angular-material.css']
+gulp.task 'less:compile', ['bower'], ->
+  gulp.src [ 'less/manifest.less' ]
+      .pipe plumber()
+      .pipe sourcemaps.init()
+      .pipe less()
+      .pipe concat('styles.css')
+      .pipe sourcemaps.write('.')
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
@@ -37,7 +43,7 @@ gulp.task 'coffee:compile', ->
       .pipe gulp.dest('./public/assets/dist/')
 
 
-gulp.task 'default', ['bower:concat', 'bower:css', 'coffee:compile'], ->
+gulp.task 'default', ['bower:concat', 'less:compile', 'coffee:compile'], ->
 
 gulp.task 'webserver', ['default'], ->
   gulp.src './public'
@@ -51,5 +57,6 @@ gulp.task 'webserver', ['default'], ->
       })
 
 gulp.task 'watch', ['webserver'], ->
-  gulp.watch ['./bower.json'], ['bower:concat', 'bower:css']
+  gulp.watch ['./bower.json'], ['bower:concat', 'less:compile']
   gulp.watch ['./app/**/*.coffee','./config/**/*.coffee'], ['coffee:compile']
+  gulp.watch ['./less/*.less'], ['less:compile']
