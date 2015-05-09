@@ -9,11 +9,28 @@
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.css">
   <link rel="stylesheet" href="/assets/octo-blue-theme.css">
   <link rel="stylesheet" href="/assets/styles.css">
+  <link rel="stylesheet" href="/assets/webfonts/ss-social-regular.css">
   <title>Email/Password Authenticator</title>
 </head>
 <body ng-app="email-password" md-theme="octo-blue">
-  <div ng-view class="main-container">
+  <div class="main-container">
+    <md-content ng-view class="auth-container"></md-content>
 
+    <footer class="align-center section auth-footer">
+      <div class="section__inner section__inner--footer">
+        <p class="auth-footer__links">
+          <a href="//blog.citrix.com/team/octoblu/" class="auth-footer__link">Blog</a> •
+          <a href="//developer.octoblu.com" class="auth-footer__link">Developers</a> •
+          <a href="//gateblu.octoblu.com/" class="auth-footer__link" title="Octoblu's IoT Gateway">Gateblu</a> •
+          <a href="mailto://info@octoblu.com" class="auth-footer__link">Contact Us</a> •
+          <a href="//app.octoblu.com/terms" class="auth-footer__link">Terms &amp; Conditions</a>
+        </p>
+
+        <a href="https://www.citrix.com/" title="Octoblu, now part of Citrix">
+          <img src="/assets/images/citrix-logo.png" alt="Citrix" class="auth-footer__citrix-logo">
+        </a>
+      </div>
+    </footer>
   </div>
   <script src="//d1g8h12lk9ydf.cloudfront.net/js/v1.12.0/meshblu.bundle.js"></script>
   <script src="/assets/dist/dependencies.js"></script>

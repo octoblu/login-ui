@@ -1,38 +1,34 @@
-<div class="login-card">
-  <div class="logo-container">
-    <img src="/assets/images/octoblucircle.png">
-  </div>
+  <div class="auth-card">
+    <img class="auth-octoblu-logo" src="/assets/images/octoblu-color.png">
 
-  <form name="controller.loginForm" class="user-form" ng-submit="controller.login(email, password)" novalidate>
-    <h3 class="form-header">Login</h3>
+    <form name="controller.loginForm" class="auth-form" ng-submit="controller.login(email, password)" novalidate>
+      <h3 class="auth-form-header">Login</h3>
 
-    <md-input-container flex>
-      <label>Email</label>
-      <input type="email" ng-model="email" name="email" required>
-      <div ng-messages="controller.loginForm.email.$error">
-        <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
-        <div ng-message="email" ng-show="controller.loginForm.email.$error.email">Must be a valid email address.</div>
+      <md-input-container>
+        <label>Email</label>
+        <input type="email" ng-model="email" name="email" required>
+        <div ng-messages="controller.loginForm.email.$error">
+          <div ng-message="required" ng-show="controller.emailRequiredError()">Required.</div>
+          <div ng-message="email" ng-show="controller.loginForm.email.$error.email">Must be a valid email address.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container>
+        <label>Password</label>
+        <input type="password" ng-model="password" name="password" required>
+        <div ng-messages="controller.loginForm.password.$error">
+          <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
+          <small><a ng-href="{{controller.forgotPath}}" class="align-right auth-forgot-password">Forgot Password?</a></small>
+        </div>
+      </md-input-container>
+
+      <p class="auth-form-error-message error-text" ng-show="controller.errorMessage">{{controller.errorMessage}}</p>
+
+      <div class="pin-button-container" layout="column">
+        <md-button ng-disabled="controller.loading" class="md-primary md-raised auth-form-button">Login</md-button>
       </div>
-    </md-input-container>
 
-    <md-input-container flex>
-      <label>Password</label>
-      <input type="password" ng-model="password" name="password" required>
-      <div ng-messages="controller.loginForm.password.$error">
-        <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
-        <small><a ng-href="{{controller.forgotPath}}" class="forgot-password">Forgot Password?</a></small>
-      </div>
-    </md-input-container>
+    </form>
 
-    <p class="error-text">{{controller.errorMessage}}</p>
-
-    <div layout="column">
-      <md-button ng-disabled="controller.loading" class="md-primary md-raised">Login</md-button>
-    </div>
-
-  </form>
-
-  <div class="signup-button-container">
-    <md-button class="md-primary" ng-href="{{controller.signupPath}}">Create an Account</md-button>
+    <md-button class="md-primary auth-login-button md-button md-default-theme" ng-href="{{controller.signupPath}}">Create An Account</md-button>
   </div>
-</div>
