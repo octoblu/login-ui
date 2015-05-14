@@ -13,23 +13,29 @@
   <title>Email/Password Authenticator</title>
 </head>
 <body ng-app="email-password" md-theme="octo-blue">
-  <div class="main-container">
-    <md-content ng-view class="auth-container"></md-content>
+  <div class="auth">
+    <div class="auth__inner">
+      <div class="centered-wrapper">
+        <div class="auth__card">
+          <img class="auth__octoblu-logo" src="assets/images/octoblu-color.png">
 
-    <footer class="align-center section auth-footer">
-      <div class="section__inner section__inner--footer">
-        <p class="auth-footer__links">
-          <a href="//blog.citrix.com/team/octoblu/" class="auth-footer__link">Blog</a> •
-          <a href="//developer.octoblu.com" class="auth-footer__link">Developers</a> •
-          <a href="//gateblu.octoblu.com/" class="auth-footer__link" title="Octoblu's IoT Gateway">Gateblu</a> •
-          <a href="mailto://info@octoblu.com" class="auth-footer__link">Contact Us</a> •
-          <a href="//app.octoblu.com/terms" class="auth-footer__link">Terms &amp; Conditions</a>
-        </p>
-
-        <a href="https://www.citrix.com/" title="Octoblu, now part of Citrix">
-          <img src="/assets/images/citrix-logo.png" alt="Citrix" class="auth-footer__citrix-logo">
-        </a>
+          <div ng-view></div>
+        </div>
       </div>
+    </div>
+
+    <footer class="auth__footer">
+      <p class="auth__footer-links">
+        <a href="//blog.citrix.com/team/octoblu/" class="auth__footer-link">Blog</a> •
+        <a href="//developer.octoblu.com" class="auth__footer-link">Developers</a> •
+        <a href="//gateblu.octoblu.com/" class="auth__footer-link" title="Octoblu's IoT Gateway">Gateblu</a> •
+        <a href="mailto://info@octoblu.com" class="auth__footer-link">Contact Us</a> •
+        <a href="//app.octoblu.com/terms" class="auth__footer-link">Terms &amp; Conditions</a>
+      </p>
+
+      <a href="https://www.citrix.com/" class="auth__footer-link--citrix" title="Octoblu, now part of Citrix">
+        <img src="/assets/images/citrix-logo.png" alt="Citrix" class="auth__footer-citrix-logo">
+      </a>
     </footer>
   </div>
   <script src="//d1g8h12lk9ydf.cloudfront.net/js/v1.12.0/meshblu.bundle.js"></script>
