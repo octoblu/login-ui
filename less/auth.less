@@ -1,33 +1,22 @@
-@card-padding: 16px;
+@card-padding      : 16px;
+@card-border-radius: 3px;
 
-@text-color:            #F0F0F0;
-@background-color:      #F4F5F9;
-@email-button-color:    #009688;
-@google-button-color:   #DE4D36;
-@facebook-button-color: #3C5F96;
-@twitter-button-color:  #36A9DA;
-@github-button-color:   #444444;
-@signup-button-color:   transparent;
-
-.centered {
-  width: 100%;
-  height: 100%;
-  display: table;
-}
-
-.centered-wrapper {
-  @media @tablet, @all-desktops {
-    display: table-cell;
-    vertical-align: middle;
-  }
-}
+@text-color            : #F0F0F0;
+@background-color      : #F4F5F9;
+@email-button-color    : #009688;
+@google-button-color   : #DE4D36;
+@facebook-button-color : #3C5F96;
+@twitter-button-color  : #36A9DA;
+@github-button-color   : #444444;
+@primary-button-color  : #14568f;
+@secondary-button-color: transparent;
 
 .auth {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
+  .flex-display;
+  .flex-direction(column);
+  .align-items(center);
+
+  width:100%;
 
   background: @background-color;
 
@@ -38,34 +27,31 @@
           transition: all .8s ease-in-out;
 }
 
-.auth__inner {
-  margin-top: 15px;
-  display: block;
-  width: 100%;
-
-  @media @tablet, @all-desktops {
-    .centered;
-    margin-top: 0;
-  }
-}
-
 .auth__card {
+  .flex-grow(1);
+  .flex-shrink(0);
+  .flex-display;
+  .align-items(center);
+
   width: 100%;
-  margin: 0 auto;
-  padding: @card-padding;
+  padding: @card-padding @card-padding/2;
 
   @media @tablet, @all-desktops {
     max-width: 440px;
   }
 }
 
+.auth__card-inner {
+  width: 100%;
+}
+
 .auth__form {
-  margin-bottom: 16px;
-  padding: 16px;
+  border: 1px solid #E9E9E9;
+  border-radius: @card-border-radius;
+  margin-bottom: @card-padding;
+  padding: @card-padding;
 
   background: #FFF;
-  border: 1px solid #E9E9E9;
-  border-radius: 2px;
 
   &-header {
     margin: 10px 0 16px;
@@ -76,31 +62,23 @@
   }
 }
 
-.auth__forgot-password {
-  display: block;
-
-  color: #196bb3;
-  text-align: right;
+.auth__form-row {
+  .flex-display;
 }
 
-.auth__form-message {
-  font-size: 13px;
-  font-weight: normal;
-  text-align: center;
-}
-
-.auth__form-message--error {
-  .auth__form-message;
-  color: rgb(244,67,54);
+.auth__form-checkbox {
+  margin: 0 0 15px;
 }
 
 .auth__button(@background) {
   &.md-button {
-    border-radius: 3px;
-    margin: 0 @card-padding/2 @card-padding;
-    padding: 8px 6px;
-    width: 100%;
+    .flex(1);
+
+    border-radius: @card-border-radius;
     display: block;
+    margin: 0 @card-padding/2 @card-padding;
+    padding: 10px 6px;
+    width: 100%;
 
     color: @text-color;
     font-size: 1.2em;
@@ -122,12 +100,31 @@
       margin-right: 2px;
     }
   }
+
+  &.full__bleed {
+    margin: 0;
+  }
 }
 
-.auth__button--form {
-  .auth__button(#14568f);
+.auth__button {
+  .auth__button(@primary-button-color);
+}
 
-  margin: 0 !important;
+.auth__button--secondary {
+  .auth__button(@secondary-button-color);
+
+  &.md-button {
+    color: #14568F;
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &:hover,
+    &:not([disabled]):hover,
+    &:not([disabled]):focus {
+      color: #14568F;
+      background: rgba(158,158,158,0.2);
+    }
+  }
 }
 
 .auth__button--email {
@@ -150,30 +147,6 @@
   .auth__button(@google-button-color);
 }
 
-.auth__button--signup,
-.auth__button--secondary {
-  .auth__button(@signup-button-color);
-
-  &.md-button {
-    margin-bottom: 0;
-
-    color: #14568F;
-    font-size: 14px !important;
-    text-transform: uppercase;
-
-    &:hover,
-    &:not([disabled]):hover,
-    &:not([disabled]):focus {
-      color: #14568F;
-      background: rgba(158,158,158,0.2);
-    }
-  }
-}
-
-.md-button.auth__button--secondary {
-  margin: 0;
-}
-
 .auth__octoblu-logo {
   display: block;
   width : 250px;
@@ -181,28 +154,24 @@
   margin: 0 auto 25px;
 }
 
-.auth__footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.auth__link {
+  display: block;
 
+  color: @primary-button-color;
+  text-align: right;
+}
+
+.auth__footer {
   padding: 15px 0;
-  width: 100%;
 
   color: #444;
   text-align: center;
-
-  @media @mobile {
-    display: none;
-  }
-
 }
 
 .auth__footer-link {
   display: inline;
   padding: 0 10px;
   color: #444;
-  font-size: 14px;
 
   &--citrix {
     display: block;
@@ -221,6 +190,10 @@
 
 .auth__footer-links {
   margin: 0 0 4px;
+
+  @media @mobile {
+    display: none;
+  }
 }
 
 .auth__footer-citrix-logo {

@@ -1,7 +1,7 @@
 <form name="controller.loginForm" class="auth__form" ng-submit="controller.login(email, password)" novalidate>
   <h3 class="auth__form-header">Login</h3>
 
-  <md-input-container>
+  <md-input-container class="auth__form-row">
     <label>Email</label>
     <input type="email" ng-model="email" name="email" required>
     <div ng-messages="controller.loginForm.email.$error">
@@ -10,21 +10,21 @@
     </div>
   </md-input-container>
 
-  <md-input-container>
+  <md-input-container class="auth__form-row">
     <label>Password</label>
     <input type="password" ng-model="password" name="password" required>
     <div ng-messages="controller.loginForm.password.$error">
       <div ng-message="required" ng-show="controller.loginForm.password.$error.required && controller.loginForm.password.$touched">Required.</div>
-      <small><a ng-href="{{controller.forgotPath}}" class="auth__forgot-password">Forgot Password?</a></small>
+      <small><a ng-href="{{controller.forgotPath}}" class="auth__link">Forgot Password?</a></small>
     </div>
   </md-input-container>
 
   <p class="auth__form-message--error error-text" ng-show="controller.errorMessage">{{controller.errorMessage}}</p>
 
-  <div class="pin-button-container" layout="column">
-    <md-button ng-disabled="controller.loading" class="md-primary md-raised auth__button--form">Login</md-button>
+  <div class="auth__form-row">
+    <md-button ng-disabled="controller.loading" class="md-raised md-primary full__bleed auth__button">Login</md-button>
   </div>
 
 </form>
 
-<md-button class="md-primary md-button md-default-theme auth__button--secondary" ng-href="{{controller.signupPath}}">Create An Account</md-button>
+<md-button class="full__bleed auth__button--secondary" ng-href="{{controller.signupPath}}">Create An Account</md-button>

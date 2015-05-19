@@ -1,7 +1,7 @@
 <form name="controller.signupForm" class="auth__form" ng-submit="controller.signup(email, password, confirmPassword)" novalidate>
   <h3 class="auth__form-header">Sign up</h3>
 
-  <md-input-container>
+  <md-input-container class="auth__form-row">
     <label>Email</label>
     <input type="email" name="email" ng-model="email" required>
     <div ng-messages="controller.signupForm.email.$error">
@@ -10,7 +10,7 @@
     </div>
   </md-input-container>
 
-  <md-input-container>
+  <md-input-container class="auth__form-row">
     <label>Password</label>
     <input type="password" name="password" ng-model="password" required>
     <div ng-messages="controller.signupForm.password.$error">
@@ -18,7 +18,7 @@
     </div>
   </md-input-container>
 
-  <md-input-container md-is-error="controller.confirmPasswordError()">
+  <md-input-container class="auth__form-row" md-is-error="controller.confirmPasswordError()">
     <label>Confirm Password</label>
     <input type="password" name="confirmPassword" ng-model="confirmPassword" required>
 
@@ -30,7 +30,13 @@
 
   <p class="auth-form-error-message" ng-show="controller.errorMessage">{{controller.errorMessage}}</p>
 
-  <md-button ng-disabled="controller.loading" flex class="md-primary md-raised auth__button--form">Sign Up</md-button>
+  <div class="auth__form-row">
+    <md-button ng-disabled="controller.loading" class="md-raised md-primary full__bleed auth__button">
+      Sign Up
+    </md-button>
+  </div>
 </form>
 
-<md-button class="md-primary md-button md-default-theme auth__button--secondary" ng-href="{{controller.loginPath}}">Login</md-button>
+<md-button class="full__bleed auth__button--secondary" ng-href="{{controller.loginPath}}">
+  Login
+</md-button>
