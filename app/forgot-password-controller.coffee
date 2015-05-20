@@ -5,6 +5,8 @@ class ForgotPasswordController
     @loginPath = "/?" + $.param(callback: @callbackUrl)
 
   forgotPassword: (email) =>
+    delete @message
+    delete @errorMessage
     @AuthenticatorService.forgotPassword(email)
       .then =>
         @message = 'An email has been sent.'
