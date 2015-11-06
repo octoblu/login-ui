@@ -1,39 +1,17 @@
 language: node_js
 sudo: false
 node_js:
-- '0.10'
+- '5'
 before_script:
   if [ ${TRAVIS_BRANCH} == master ]; then export NODE_ENV=production; else export NODE_ENV=staging; fi
-before_deploy: mkdir -p build && tar czf build/public.tar.gz public
 deploy:
   - provider: s3
     access_key_id: AKIAJH2D5IPIRHYJT5IA
     secret_access_key: &1
       secure: "FA+2yhY8Rd40lQKWzZshB9B/MQ0dcQ/ybkHIM0WQ9IkirnhHGgvZzLPbWIGD7r7coGoeiXzE53pyxH6K43RtiCV1rbVWWziFZRsqBj6vTxUGFzRdnU2+DWlEMR5SkAMrABPMb5g3IlJr6gcLCN2IrAn3XC634En4xaunmlW5Oe4="
-    bucket: login-authenticator
-    skip_cleanup: true
-    local-dir: build
-    acl: public_read
-    on:
-      branch: master
-  - provider: opsworks
-    access_key_id: AKIAJH2D5IPIRHYJT5IA
-    secret_access_key: *1
-    app-id: f38cccd6-515e-4dbd-ba06-883809c5ea19
-    on:
-      branch: master
-  - provider: s3
-    access_key_id: AKIAJH2D5IPIRHYJT5IA
-    secret_access_key: *1
-    bucket: login-authenticator-staging
-    skip_cleanup: true
-    local-dir: build
-    acl: public_read
-    on:
-      branch: staging
-  - provider: opsworks
-    access_key_id: AKIAJH2D5IPIRHYJT5IA
-    secret_access_key: *1
-    app-id: cf3ee600-601c-4cf8-8da2-0718db545c6c
-    on:
-      branch: staging
+  bucket: login.octoblu.com
+  local_dir: build
+  endpoint: login.octoblu.com.s3-website-us-west-2.amazonaws.com
+  region: us-west-2
+  on:
+    branch: master
