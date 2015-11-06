@@ -3,7 +3,7 @@ sudo: false
 node_js:
 - '5'
 before_script:
-  if [ ${TRAVIS_BRANCH} == master ]; then export NODE_ENV=production; else export NODE_ENV=staging; fi
+- if [ ${TRAVIS_BRANCH} == master ]; then export NODE_ENV=production; else export NODE_ENV=staging; fi
 deploy:
   - provider: s3
     access_key_id: AKIAJH2D5IPIRHYJT5IA
