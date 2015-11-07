@@ -20,7 +20,7 @@
     "angular-cookies": "^1.3.13",
     "angular-route": "^1.3.13",
     "angular-mocks": "^1.3.13",
-    "angular-material": "master",
+    "angular-material": "~0.9.4",
     "angulartics": "^0.17.2"
   },
   "resolutions": {
