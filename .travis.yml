@@ -11,6 +11,7 @@ deploy:
     secure: "FA+2yhY8Rd40lQKWzZshB9B/MQ0dcQ/ybkHIM0WQ9IkirnhHGgvZzLPbWIGD7r7coGoeiXzE53pyxH6K43RtiCV1rbVWWziFZRsqBj6vTxUGFzRdnU2+DWlEMR5SkAMrABPMb5g3IlJr6gcLCN2IrAn3XC634En4xaunmlW5Oe4="
   bucket: login.octoblu.com
   local_dir: public
+  skip_cleanup: true
   endpoint: login.octoblu.com.s3-website-us-west-2.amazonaws.com
   region: us-west-2
   on:
