@@ -9,19 +9,19 @@ angular
 
   $routeProvider
     .when '/',
-      templateUrl: '/login.html'
+      templateUrl: '/pages/login.html'
       controller:  'LoginController'
       controllerAs: 'controller'
     .when '/signup',
-      templateUrl: '/signup.html'
+      templateUrl: '/pages/signup.html'
       controller:  'SignupController'
       controllerAs: 'controller'
     .when '/forgot',
-      templateUrl: '/forgot-password.html'
+      templateUrl: '/pages/forgot-password.html'
       controller:  'ForgotPasswordController'
       controllerAs: 'controller'
     .when '/reset',
-      templateUrl: '/reset-password.html'
+      templateUrl: '/pages/reset-password.html'
       controller:  'ResetPasswordController'
       controllerAs: 'controller'
     .otherwise redirectTo: '/'
