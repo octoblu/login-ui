@@ -38,4 +38,3 @@ class ResetPasswordController
 
 
 angular.module('email-password').controller 'ResetPasswordController', ResetPasswordController
-

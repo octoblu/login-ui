@@ -3,7 +3,7 @@ angular
 .config ($routeProvider, $locationProvider, $mdThemingProvider) ->
   $mdThemingProvider.theme('octo-blue')
 
-  $locationProvider.html5Mode(false).hashPrefix '!'
+  $locationProvider.html5Mode true
 
   $routeProvider
     .when '/',
