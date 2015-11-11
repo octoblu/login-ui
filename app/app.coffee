@@ -3,8 +3,7 @@ angular
 .config ($routeProvider, $locationProvider, $mdThemingProvider) ->
   $mdThemingProvider.theme('octo-blue')
 
-  html5Options = enabled: true, requireBase: false
-  $locationProvider.html5Mode(html5Options).hashPrefix '!'
+  $locationProvider.html5Mode(false).hashPrefix '!'
 
   $routeProvider
     .when '/',
@@ -24,4 +23,5 @@ angular
       controller:  'ResetPasswordController'
       controllerAs: 'controller'
     .otherwise redirectTo: '/'
+
 .run ($rootScope, $location) ->
