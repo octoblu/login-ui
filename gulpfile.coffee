@@ -46,10 +46,11 @@ gulp.task 'coffee:compile', ->
 gulp.task 'default', ['bower:concat', 'less:compile', 'coffee:compile'], ->
 
 gulp.task 'webserver', ['default'], ->
+  port = process.env.PORT ? 8888
   gulp.src './public'
       .pipe webserver({
         host: '0.0.0.0'
-        port: 8888
+        port: port
         livereload: false
         directoryListing: false
         open: false
