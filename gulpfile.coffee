@@ -23,10 +23,8 @@ gulp.task 'bower:concat', ['bower'], ->
 gulp.task 'less:compile', ['bower'], ->
   gulp.src [ 'less/manifest.less' ]
       .pipe plumber()
-      .pipe sourcemaps.init()
       .pipe less()
-      .pipe concat('styles.css')
-      .pipe sourcemaps.write('.')
+      .pipe concat('styles.css')      
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
