@@ -1,6 +1,6 @@
 {
   "name": "email-password-site",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Front end for email and password authenticator",
   "main": "index.js",
   "scripts": {
