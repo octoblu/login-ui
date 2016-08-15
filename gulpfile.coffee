@@ -24,14 +24,13 @@ gulp.task 'less:compile', ['bower'], ->
   gulp.src [ 'less/manifest.less' ]
       .pipe plumber()
       .pipe less()
-      .pipe concat('styles.css')      
+      .pipe concat('styles.css')
       .pipe gulp.dest('./public/assets/dist/')
 
 gulp.task 'coffee:compile', ->
-  environment = process.env.NODE_ENV ? 'development'
-  configFile = "./config/#{environment}.coffee"
+  configFiles = "./config/*.coffee"
 
-  files = ['./app/**/*.coffee', configFile]
+  files = ['./app/**/*.coffee', configFiles]
 
   gulp.src files
       .pipe plumber()
@@ -46,16 +45,16 @@ gulp.task 'default', ['bower:concat', 'less:compile', 'coffee:compile'], ->
 gulp.task 'webserver', ['default'], ->
   port = process.env.PORT ? 8888
   gulp.src './public'
-      .pipe webserver({
-        host: '0.0.0.0'
-        port: port
-        livereload: false
-        directoryListing: false
-        open: false
-        fallback: 'index.html'
-      })
+    .pipe webserver({
+      host: '0.0.0.0'
+      port: port
+      livereload: false
+      directoryListing: false
+      open: false
+      fallback: 'index.html'
+    })
 
 gulp.task 'watch', ['webserver'], ->
   gulp.watch ['./bower.json'], ['bower:concat', 'less:compile']
-  gulp.watch ['./app/**/*.coffee','./config/**/*.coffee'], ['coffee:compile']
+  gulp.watch ['./app/**/*.coffee','./config/*.coffee'], ['coffee:compile']
   gulp.watch ['./less/*.less'], ['less:compile']

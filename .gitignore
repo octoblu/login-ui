@@ -37,3 +37,4 @@ meshblu.json
 .*-dev
 *.dockerfile-dev
 npmrc-dev
+dpl_assets

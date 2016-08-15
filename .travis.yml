@@ -1,18 +1,22 @@
 language: node_js
-sudo: false
 node_js:
 - '5'
-before_script:
-- if [ ${TRAVIS_BRANCH} == master ]; then export NODE_ENV=production; else export NODE_ENV=staging; fi
+branches:
+  only:
+  - /^v[0-9]/
+after_success:
+- export PKG_VERSION="$(node -e 'console.log(require("./package.json").version)')"
+- if [ -z "$PKG_VERSION" ]; then echo 'Missing PKG_VERSION env' && exit 1; fi
+- mkdir -p dpl_assets/v$PKG_VERSION
+- cp -r public/assets/* dpl_assets/v$PKG_VERSION 
 deploy:
 - provider: s3
   access_key_id: AKIAJH2D5IPIRHYJT5IA
   secret_access_key: &1
     secure: "FA+2yhY8Rd40lQKWzZshB9B/MQ0dcQ/ybkHIM0WQ9IkirnhHGgvZzLPbWIGD7r7coGoeiXzE53pyxH6K43RtiCV1rbVWWziFZRsqBj6vTxUGFzRdnU2+DWlEMR5SkAMrABPMb5g3IlJr6gcLCN2IrAn3XC634En4xaunmlW5Oe4="
-  bucket: login.octoblu.com
-  local_dir: public
+  bucket: login-static.octoblu.com
+  local_dir: dpl_assets
   skip_cleanup: true
-  endpoint: login.octoblu.com.s3-website-us-west-2.amazonaws.com
   region: us-west-2
   on:
-    branch: master
+    tags: true

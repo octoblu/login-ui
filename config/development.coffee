@@ -1,1 +1,2 @@
-angular.module('email-password').constant 'AUTHENTICATOR_URI', "http://#{window.location.hostname}:3003"
+return unless location.hostname == 'localhost'
+angular.module('email-password').constant 'AUTHENTICATOR_URI', "http://localhost:3003"
