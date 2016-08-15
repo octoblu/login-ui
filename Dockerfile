@@ -19,5 +19,6 @@ RUN ./scripts/rewrite-files.sh "https://login-static.octoblu.com/v$(cat .PKG_VER
 RUN sed -e \
   "s/PKG_VERSION/$(cat .PKG_VERSION)/" \
   /templates/default.template > \
-  /templates/default.conf
+  /etc/nginx/conf.d/default.conf
 
+RUN cp /templates/*.conf /etc/nginx/conf.d/
