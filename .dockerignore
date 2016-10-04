@@ -1,7 +1,6 @@
 node_modules
 test
 lib
-public/assets/dist
 dpl_*
 
 .git/branches
