@@ -1,11 +1,14 @@
 {
   "name": "email-password-site",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Front end for email and password authenticator",
   "main": "index.js",
   "scripts": {
     "start": "gulp webserver",
-    "test": "gulp && node_modules/karma/bin/karma start --single-run"
+    "test": "gulp && node_modules/karma/bin/karma start --single-run",
+    "coverage": "nyc npm test",
+    "mocha:json": "env NPM_ENV=test mocha --reporter json > coverage/mocha.json",
+    "test:watch": "mocha -w -R mocha-multi --reporter-options spec=-,mocha-osx-reporter=-"
   },
   "repository": {
     "type": "git",
@@ -56,6 +59,20 @@
     "karma-spec-reporter": "0.0.13",
     "mocha": "^2.3.3",
     "sinon": "^1.12.2",
-    "sinon-chai": "^2.6.0"
+    "sinon-chai": "^2.6.0",
+    "nyc": "^8.3.0",
+    "mocha-osx-reporter": "^0.1.2",
+    "mocha-multi": "^0.9.1"
+  },
+  "nyc": {
+    "cache": true,
+    "reporter": [
+      "text-summary",
+      "lcov",
+      "json"
+    ],
+    "extension": [
+      ".coffee"
+    ]
   }
 }
