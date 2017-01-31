@@ -5,16 +5,18 @@ branches:
   only:
     - '/^v[0-9]/'
 after_success:
+  - npm run coverage
+  - 'npm run mocha:json'
+  - 'bash <(curl -s https://codecov.io/bash)'
+  - 'bash <(curl -s https://codecov.octoblu.com/bash)'
+before_deploy:
   - >-
     export PKG_VERSION="$(node -e
     'console.log(require("./package.json").version)')"
   - 'if [ -z "$PKG_VERSION" ]; then echo ''Missing PKG_VERSION env'' && exit 1; fi'
   - mkdir -p dpl_assets/v$PKG_VERSION
   - cp -r public/assets/* dpl_assets/v$PKG_VERSION
-  - npm run coverage
-  - 'npm run mocha:json'
-  - 'bash <(curl -s https://codecov.io/bash)'
-  - 'bash <(curl -s https://codecov.octoblu.com/bash)'
+  - echo "$PKG_VERSION" > dpl_assets/v$PKG_VERSION/version
 deploy:
   - provider: s3
     access_key_id: AKIAJH2D5IPIRHYJT5IA

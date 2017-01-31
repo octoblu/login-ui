@@ -30,8 +30,17 @@ start_nginx() {
   fi
 }
 
+verify() {
+  local url="https://login-static.octoblu.com/v$(cat /.PKG_VERSION)/version"
+  curl --show-error \
+		--silent \
+		--location \
+		--fail "$url"
+}
+
 main() {
-  write_default_config && \
+  verify && \
+    write_default_config && \
     copy_config && \
     start_nginx
 }

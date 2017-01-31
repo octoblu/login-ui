@@ -1,9 +1,9 @@
 FROM nginx
 MAINTAINER Octoblu <docker@octoblu.com>
 
-HEALTHCHECK CMD curl --fail http://localhost:80/healthcheck || exit 1
-
 EXPOSE 80
+
+HEALTHCHECK CMD curl --fail http://localhost:80/healthcheck || exit 1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       ca-certificates \
@@ -20,13 +20,13 @@ RUN cat package.json \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]' > .PKG_VERSION
 
-COPY public/ public/ 
+COPY public/ public/
 COPY public/ /usr/share/nginx/bundled/
 COPY scripts/ scripts/
-COPY templates/ templates/ 
+COPY templates/ templates/
 
 RUN ./scripts/rewrite-files.sh "https://login-static.octoblu.com/v$(cat .PKG_VERSION)" '/public' '/usr/share/nginx/html'
-  
+
 RUN sed -e \
   "s/PKG_VERSION/$(cat .PKG_VERSION)/" \
   /templates/default.template > \
