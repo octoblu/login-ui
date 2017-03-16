@@ -6,7 +6,6 @@ sourcemaps     = require 'gulp-sourcemaps'
 coffee         = require 'gulp-coffee'
 less           = require 'gulp-less'
 webserver      = require 'gulp-webserver'
-_              = require 'lodash'
 mainBowerFiles = require 'main-bower-files'
 
 gulp.task 'bower', ->
@@ -38,7 +37,6 @@ gulp.task 'coffee:compile', ->
       .pipe concat('application.js')
       .pipe sourcemaps.write('.')
       .pipe gulp.dest('./public/assets/dist/')
-
 
 gulp.task 'default', ['bower:concat', 'less:compile', 'coffee:compile'], ->
 

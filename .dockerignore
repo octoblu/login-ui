@@ -1,7 +1,7 @@
 node_modules
-test
 lib
 dpl_*
+dist
 
 .git/branches
 .git/hooks
@@ -18,3 +18,4 @@ dpl_*
 .git/index
 .git/last_remote_update
 .git/packed-refs
+

@@ -1,31 +1,32 @@
 {
   "name": "login-ui",
-  "version": "2.0.7",
+  "version": "3.0.0",
   "description": "Front end for email and password authenticator",
   "main": "index.js",
   "scripts": {
     "start": "gulp webserver",
     "test": "gulp && node_modules/karma/bin/karma start --single-run",
+    "build": "gulp && mkdir -p dist && cp -rfp public/* dist",
     "coverage": "nyc npm test",
     "mocha:json": "env NPM_ENV=test mocha --reporter json > coverage/mocha.json",
-    "test:watch": "mocha -w -R mocha-multi --reporter-options spec=-,mocha-osx-reporter=-"
+    "test:watch": "mocha -w -R mocha-multi --reporter-options spec=-,mocha-osx-reporter=-",
+    "preinstall": "yarn global add gulp bower"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/octoblu/email-password-site.git"
+    "url": "https://github.com/octoblu/login-ui.git"
   },
   "keywords": [
     "octoblu",
-    "cats",
     "flows",
     "IoT"
   ],
-  "author": "Sqrt of Saturn",
+  "author": "Octoblu, Inc",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/octoblu/email-password-site/issues"
+    "url": "https://github.com/octoblu/login-ui/issues"
   },
-  "homepage": "https://github.com/octoblu/email-password-site",
+  "homepage": "https://github.com/octoblu/login-ui",
   "dependencies": {
     "angular-material": "^0.7.1",
     "body-parser": "^1.11.0",
